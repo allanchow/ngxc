@@ -1,0 +1,163 @@
+nginx:
+  name:      nginx
+#  version:   1.10.3
+  apt:
+    #url:       http://nginx.org/download/nginx-1.10.3.tar.gz
+    #url:       http://nginx.org/download/nginx-1.11.13.tar.gz
+    url:       http://nginx.org/download/nginx-1.12.0.tar.gz
+  options:
+    prefix:       /usr/local/nginx
+    # sbin:         /usr/local/nginx/sbin/nginx
+    # modules-path: /usr/local/nginx/modules
+    # conf:         /usr/local/nginx/conf/nginx.conf
+    # http-log:     /usr/local/nginx/logs/access.log
+    # error-log:    /usr/local/nginx/logs/error.log
+    # pid:          /var/run/nginx.pid
+    #user:         nginx
+    #group:        nginx
+    force_tfo:    True
+    debug:        False
+  setup:
+    before-script:
+      - CFLAGS: -Ofast
+    # before-script:
+    #   - CFLAGS: -Ofast $(pcre-config --cflags)
+    #   - LDFLAGS: -lz -L/build/BUILDROOT/vm/lib
+    patches:
+      - nginx.1.12.x.no-server.patch: -p0 -B .no-server
+      - nginx.1.12.x.no-footer.patch: -p0 -B .no-footer
+      - nginx.1.12.x.larger-max-error-str.patch: -p0 -B .larger-max-error-str
+      # HAVE_PRIVILEGED_PROCESS_PATCH
+      - nginx.1.12.x.priviledged_agent_process.patch: -p1
+      # LUA - HAVE_POSTED_DELAYED_EVENTS_PATCH
+      # https://github.com/openresty/lua-nginx-module/commit/2dd44623d7823c89ee081e10cf5346f5a8972ef4
+      - nginx.1.12.x.delayed_posted_events.patch: -p1
+      # LUA - HAVE_INTERCEPT_ERROR_LOG_PATCH
+      # https://github.com/openresty/lua-nginx-module/commit/1a5a33e61f4d747efa8460555407357ca166eca1
+      - nginx.1.12.x.intercept_error_log.patch: -p1
+
+    <<: *base-pre-post-build
+  library:
+    - name: libatomic
+      ref: atomic_ops
+    #   setup:
+    #     before-script:
+    #       - sed -i 's|configure|autogen.sh \&\& ./configure --disable-dependency-tracking|' auto/lib/libatomic/make
+    #       - sed -i 's|src/libatomic_ops.a|src/.libs/libatomic_ops.a|' auto/lib/libatomic/make
+    #       - sed -i 's|src/libatomic_ops.a|src/.libs/libatomic_ops.a|' auto/lib/libatomic/conf
+    #  <<: *base-pre-post-build
+    - name: zlib
+      ref: zlib
+      setup:
+        patches:
+          - nginx.zlib-ng.patch: -p0 -B .zlib-ng
+    - name: openssl
+      ref: openssl
+    - name: pcre
+      ref: libpcre
+      # setup:
+      #   before-script:
+      #     - LDFLAGS: -Wl,-Bstatic -lpcre -lpthread -Wl,-Bdynamic -ldl
+  modules:
+    third-party: *mods
+    bundled:
+      # 1.11.X+
+      - name: compat
+        status: active
+      - name: stream
+        dynamic: True
+        status: active
+      - name: stream_ssl_module
+        status: active
+      - name: stream_realip_module
+        status: active
+      - name: stream_geoip_module
+        dynamic: True
+        requires:
+          - geoip
+      - name: stream_ssl_preread_module
+        status: active
+      - name: stream_limit_conn_module
+        status: active
+      - name: stream_access_module
+        status: active
+      - name: stream_geo_module
+      - name: stream_map_module
+        status: active
+      - name: stream_split_clients_module
+        status: active
+      - name: stream_return_module
+        status: active
+      - name: stream_upstream_hash_module
+        status: active
+      - name: stream_upstream_least_conn_module
+        status: active
+      - name: stream_upstream_zone_module
+        status: active
+      - name: file-aio
+        status: active
+      - name: threads
+        status: active
+      - name: pcre-jit
+        status: active
+        # setup:
+        #   before-script:
+        #     - LDFLAGS: -lpcre -lpthread
+        requires:
+          - libpcre
+      - name: http_addition_module
+        status: active
+      - name: http_auth_request_module
+        status: active
+      - name: http_dav_module
+      - name: http_flv_module
+      - name: http_gunzip_module
+        status: active
+      - name: http_gzip_static_module
+        status: active
+        requires:
+          - zlib
+      - name: http_mp4_module
+      - name: http_realip_module
+        status: active
+      - name: http_secure_link_module
+        status: active
+      - name: http_slice_module
+        status: active
+      - name: http_ssl_module
+        status: active
+      - name: http_stub_status_module
+        status: active
+      - name: http_sub_module
+      - name: http_v2_module
+        status: active
+      - name: http_xslt_module
+        dynamic: True
+        setup:
+          before-script:
+            - sed -i s|ngx_feature_path="/usr/include/libxml2"|ngx_feature_path="${VM_INCLUDE_PATH} ${VM_INCLUDE_PATH}/libxml2"|g' auto/lib/libxslt/conf
+        requires:
+          - libxml2
+          - libxslt
+      - name: http_image_filter_module
+        dynamic: True
+        requires:
+          - libgd
+      - name: http_geoip_module
+        dynamic: True
+        setup:
+          before-script:
+             #- sed -i' ' 's|ngx_feature_libs="-lGeoIP"|ngx_feature_libs="$(pkg-config --libs --static ${VM_LIBRARY_PATH}/pkgconfig/geoip.pc)"|g' auto/lib/geoip/conf
+            - sed -i 's|ngx_feature_libs="-lGeoIP"|ngx_feature_libs="$(pkg-config --libs --static geoip)"|g' auto/lib/geoip/conf
+            - sed -i 's|-lGeoIP\([[:space:]$\"]\)|${VM_LIBRARY_PATH}/libGeoIP.a\1|g' auto/lib/geoip/conf
+        #   patches:
+        requires:
+          - geoip
+      - name: http_perl_module
+        dynamic: True
+      - name: http_random_index_module
+      - name: mail
+        dynamic: True
+      - name: mail_ssl_module
+      - name: http_memcached_module
+      - name: http_autoindex_module

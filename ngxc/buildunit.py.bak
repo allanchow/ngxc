@@ -1,0 +1,237 @@
+# -*- coding: utf-8 -*-
+
+from abc import ABCMeta, abstractproperty, abstractmethod
+import collections
+import enum
+import os
+import sys
+import shutil
+import logging
+import itertools
+from typing import Tuple, List, Generator, Optional, Dict, Union
+
+from ngxc.base import _BaseObject, OrderedSet
+from ngxc.map import MergedMap, MergeMapType
+from ngxc.command import Command, Patch
+from ngxc.utils import is_flag, isempty
+from ngxc.yaml import YamlMap, YamlKey, YamlKeyType
+from ngxc.environment import Environment
+from ngxc.err import ErrMsg
+
+
+class Scope(enum.Enum):
+    LOCAL = 'local'
+    GLOBAL = 'global'
+
+
+class State(enum.Enum):
+    ACTIVE = 'active'
+    INACTIVE = 'inactive'
+
+
+class Stage(enum.IntEnum):
+    Patch = 1 << 0
+    PreBuild = 1 << 1
+    BuildScript = 1 << 2
+    PostBuild = 1 << 3
+    All = Patch | PreBuild | BuildScript | PostBuild
+
+
+class MergeDirection(enum.IntEnum):
+    Before = 1
+    After = 2
+
+
+class BuildUnit(_BaseObject, metaclass=ABCMeta):
+
+    @staticmethod
+    def __get_cmd_and_env(obj: List=None) -> Tuple[List[Command], MergedMap]:
+        cmd = OrderedSet()
+        env = {}        # type: Dict[str,str]
+        if not obj is None:
+            for item in obj:
+                #print(item)
+                if isinstance(item, str):
+                    # force running command in a shell mode, for evaluating user commands
+                    cmd.add(Command(item.strip(), shell=True))
+                elif isinstance(item, (dict, YamlMap, collections.MutableMapping)):
+                    env.update(item)
+        # parse variables defined in Environment.global_env
+        p_env = {k:Command('echo -n %s' % v.strip())._runtimeout=5, env=Environment.global_env, stdout=False, log=False).strip() for k, v in env.items()}
+        return (cmd, MergedMap(p_env))
+
+    def is_stage(self, stage: int) -> bool:
+        return is_flag(int(stage), self._stage)
+    #__slots__ = ('patches', 'pre_run', 'pre_environment', 'post_run', 'post_environemnt', 'configure', 'make')
+
+    def __init__(self, node: YamlMap, stage: int=Stage.All) -> None:
+        self._compiled = False
+        self.dry_run = False
+        # print(node.name)
+        # print(node.branch)
+        node = node.get('setup', default={}, key=YamlKey.Optional)
+        # print(type(node))
+        # print('----')
+        self.threads_enabled = node.get('threads-enabled', default=True, key=YamlKey.Optional)
+        self._stage = stage             # type: int
+        self._patches, self._pre_run, self._pre_environment, self._post_run, self._post_environment, self._build_script = BuildUnit.__getparam(
+            node, stage)
+
+    @classmethod
+    def __getparam(cls, node: YamlMap, stage: int=Stage.All) -> Tuple:
+        _patches = OrderedSet()
+        _pre_run = OrderedSet()
+        #_pre_env = MergedMap()
+        _pre_env = None
+        _post_run = OrderedSet()
+        #_post_env = MergedMap()
+        _post_env = None
+        _build_script = OrderedSet()
+        #print(node)
+        #print(stage)
+        if is_flag(Stage.Patch, stage):
+            for p in node.get('patches', default=[], key=YamlKey.Optional, keytype=YamlKeyType.Sequence):
+                for pf, v in p.items():
+                    patchfile = '%s/%s' % (Environment.source.patch_path, pf)
+                    assert os.path.exists(patchfile), ErrMsg.FileNotFound.format(patchfile)
+                    _patches.add(Patch(patchfile, v))
+        if is_flag(Stage.PreBuild, stage):
+            _pre_run, _pre_env = cls.__get_cmd_and_env(node.get('before-script', default=[], key=YamlKey.Optional, keytype=YamlKeyType.Sequence))
+            #print(_pre_env)
+        if is_flag(Stage.PostBuild, stage):
+            _post_run, _post_env = cls.__get_cmd_and_env(node.get('after-script', default=[], key=YamlKey.Optional, keytype=YamlKeyType.Sequence))
+        if is_flag(Stage.BuildScript, stage):
+            for m in node.get('script', default=[], key=YamlKey.Optional, keytype=YamlKeyType.Sequence):
+                _build_script.add(Command(m, shell=True))
+        return (_patches, _pre_run, _pre_env, _post_run, _post_env, _build_script)
+
+    def merge(self, node: YamlMap, stage: int=Stage.All, mdir: MergeDirection=MergeDirection.After) -> 'BuildUnit':
+        if node is None:
+            return self
+        _patches, _pre_run, _pre_environment, _post_run, _post_environment, _build_script = self.__getparam(node, stage)
+        #print(node)
+        # print(_pre_environment)
+        # sys.exit()
+        # another = BuildUnit(node, stage)
+        # assert isinstance(another, Setup), ErrMsg.TypeMisMatch.format(another, Setup)
+        # self._patches.extend(_patches)
+        self._stage |= stage
+        if self.is_stage(Stage.Patch) and _patches:
+            #self._patches = [*self._patches, *_patches] if mdir == MergeDirection.After else [*_patches, *self._patches]
+            self._patches = self._patches | _patches if mdir == MergeDirection.After else _patches | self._patches
+        if self.is_stage(Stage.PreBuild) and (_pre_run or _pre_environment):
+            #print(self._pre_run()
+            #print(_pre_run()
+            #self._pre_run = [*self._pre_run, *_pre_run] if mdir == MergeDirection.After else [*_pre_run, *self._pre_run]
+            self._pre_run = self._pre_run | _pre_run if mdir == MergeDirection.After else _pre_run | self._pre_run
+            self._pre_environment.merge(_pre_environment)
+        if self.is_stage(Stage.PostBuild) and (_post_run or _post_environment):
+            #self._post_run = [*self._post_run, *_post_run] if mdir == MergeDirection.After else [*_post_run, *self._post_run]
+            self._post_run = self._post_run | _post_run if mdir == MergeDirection.After else _post_run | self._post_run
+            self._post_environment.merge(_post_environment)
+        if self.is_stage(Stage.BuildScript) and _build_script:
+            # self._build_script = [*self._build_script, *
+            #                       _build_script] if mdir == MergeDirection.After else [*_build_script, *self._build_script]
+            self._build_script = self._build_script | _build_script if mdir == MergeDirection.After else _build_script | self._build_script
+        # del another
+        return self
+
+    @abstractmethod
+    def _gen_commands(self) -> Generator[Tuple[Stage, Optional[Command]], None, None]:
+        # return [*[c.command for c in self._patches], *self._pre_run, *self._build_script, *self._post_run]
+        """ In each stage, yield each command and yield None in the end for a end mark """
+        #p = [c.command for c in self._patches] if self.is_stage(Stage.Patch) else []
+        commands = [(Stage.Patch, self._patches if self.is_stage(Stage.Patch) else [])]
+        commands = [*commands, (Stage.PreBuild, self._pre_run if self.is_stage(Stage.PreBuild) else [])]
+        commands = [*commands, (Stage.BuildScript, self._build_script if self.is_stage(Stage.BuildScript) else [])]
+        commands = [*commands, (Stage.PostBuild, self._post_run if self.is_stage(Stage.PostBuild) else [])]
+        # Make - to be run in parallel
+        for s, cmd in commands:
+            for c in cmd:
+                # modify make command
+                mt = ['-j', Environment.num_of_processors] if self.threads_enabled else []
+                if c.executable.endswith('make'):
+                    c = Command([c.executable, *mt, c.args])
+                yield (s, c)
+            yield (s, None)
+
+    @abstractproperty
+    def sourcedir(self) -> str:
+        pass
+
+    @abstractmethod
+    def _run(self, env: Union[Dict[str, str], MergedMap]=None) -> None:
+        logging.debug("\033[1;92m--------- %s [%s] ---------\033[0m" % (self.name, self._compiled))
+        # in seq: 1. os env; 2. global environment; 3. self pre-environment; 4. local func env arguments
+        #use_env = MergedMap(os.environ.copy())
+        # use_env.update(Environment.global_env)
+        if self._compiled:
+            return
+
+        #use_env = MergedMap({**os.environ.copy(), **Environment.global_env})
+
+        use_env = MergedMap()
+        if env is not None:
+            use_env.merge(env, merge=MergeMapType.AsString)
+        use_env.merge(self._pre_environment, merge=MergeMapType.AsString)
+        use_env.merge(Environment.global_env, merge=MergeMapType.AsString)
+        use_env.merge(os.environ.copy(), merge=MergeMapType.AsString)
+
+        use_env.pop('PREFIX', None)
+        use_env['PREFIX'] = Environment.working.prefix
+
+        logging.debug('PREFIX: %s' % use_env.get('PREFIX'))
+
+        cwd = '%s/%s' % (Environment.buildroot, self.build_name)
+        if not isempty(self.sourcedir):
+            src = '%s/%s/' % (self.sourcedir, self.name)
+            if os.path.exists(src) and src != cwd and not os.path.exists(cwd):
+                Command(['rsync', '-avH', '--delete', '--quiet', src, cwd])._run()
+
+            #
+                #shutil.copytree(src, cwd)
+        # run patches
+        #for p in self._patches: p.command._runcwd=cwd)
+        # NOTE: run a series of commands once such that the env could presistent if some commands make env change
+        cmd_sep = r' && '
+        #(uname -b; if [ $? -ne 0 ]; then echo def; fi) && echo c
+        #__shell = None
+
+        # TODO: pipe the Commands instead of join, which could pipe any envrionmental changes
+        def func(x):
+            cmd = x[1]
+            fcmd = '%s' % str(cmd)
+            rcmd = cmd.rescue_cmd
+            if rcmd:
+                #__shell = True
+                rcmd = ' '.join(rcmd) if isinstance(rcmd, list) else rcmd
+                fcmd = '(%s; if [ $? -ne 0 ]; then %s; fi)' % (fcmd, rcmd)
+            return 'echo "\033[1;92m%s\033[0m" %s %s' % (str(fcmd), cmd_sep, str(fcmd))
+            #return '%s' % str(fcmd)
+
+        #for cmd in itertools.filterfalse(lambda x: x[1] is None, self._gen_commands())):
+
+        cmd = cmd_sep.join(map(func, itertools.filterfalse(lambda x: x[1] is None, self._gen_commands())))
+
+        #cmd = cmd_sep.join(['echo "\033[1;92m%s\033[0m" %s %s' % (str(cmd), cmd_sep, str(cmd))
+        #                    for _, cmd in self._gen_commands() if cmd])
+        if cmd:
+            # NOTE: commands in any stage should be executed in shell, user will do
+            # anything like in shell mode, e.g. variable expansion
+            Command(cmd, shell=True)._run(env=use_env, cwd=cwd, dry_run=self.dry_run()
+            Command(['sync'])._rundry_run=self.dry_run()
+
+        Environment.global_env.merge(self._post_environment, merge=MergeMapType.AsString)
+        self._compiled = True
+
+    @property
+    def is_compiled(self) -> bool:
+        return self._compiled
+
+    @abstractproperty
+    def name(self) -> str:
+        pass
+
+    @abstractproperty
+    def build_name(self) -> str:
+        pass

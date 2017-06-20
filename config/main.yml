@@ -1,0 +1,7 @@
+%YAML 1.2
+---
+includes:
+  - defaults.yml
+  - env.yml
+  - inventory.yml
+  - nginx.yml

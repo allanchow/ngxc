@@ -1,0 +1,644 @@
+2017-05-02 23:10:43,157 - INFO - Python Version: 3.5.2
+2017-05-02 23:10:43,157 - DEBUG - Popen(['git', 'version'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:43,160 - INFO - Git Version: 2.9.3
+2017-05-02 23:10:43,264 - DEBUG - Command [shell=True, dry_run=False, pwd=.]: "[1;92mdpkg-query -W -f='${Version}'  gcc | sed 's#^\([[:digit:]]*:\)*\([^\-]\+\)\-.*$#\2#g' | sed 's#\.##g'[0m"
+2017-05-02 23:10:43,298 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mld -v[0m"
+2017-05-02 23:10:43,356 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/lua-cjson.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:44,616 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-cjson, universal_newlines=False, shell=None)
+2017-05-02 23:10:44,672 - DEBUG - Popen(['git', 'ls-remote', 'http://luajit.org/git/luajit-2.0.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:45,731 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/luajit, universal_newlines=False, shell=None)
+2017-05-02 23:10:45,827 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/cloudflare/lua-resty-logger-socket.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:47,051 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-resty-logger-socket0, universal_newlines=False, shell=None)
+2017-05-02 23:10:47,103 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/Dead2/zlib-ng.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:48,359 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/zlib, universal_newlines=False, shell=None)
+2017-05-02 23:10:48,391 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/lua-nginx-module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:50,085 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/lua-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:10:50,173 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/memc-nginx-module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:51,380 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/memc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:10:51,401 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/headers-more-nginx-module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:52,625 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/headers-more-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:10:52,646 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/grahamedgecombe/nginx-ct.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:53,881 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/nginx-ct, universal_newlines=False, shell=None)
+2017-05-02 23:10:53,903 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/ivmai/libatomic_ops.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:55,317 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/atomic_ops, universal_newlines=False, shell=None)
+2017-05-02 23:10:55,360 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/lua-resty-lrucache.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:56,561 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-resty-lrucache, universal_newlines=False, shell=None)
+2017-05-02 23:10:56,619 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/srcache-nginx-module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:57,860 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/srcache-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:10:57,882 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/google/ngx_brotli.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:10:59,115 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module, universal_newlines=False, shell=None)
+2017-05-02 23:10:59,161 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/yzprofile/ngx_http_dyups_module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:00,420 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-http-dyups-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:00,443 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openssl/openssl.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:02,855 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/openssl, universal_newlines=False, shell=None)
+2017-05-02 23:11:02,923 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/hamishforbes/lua-resty-iputils.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:04,263 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-resty-iputils, universal_newlines=False, shell=None)
+2017-05-02 23:11:04,312 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/set-misc-nginx-module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:05,503 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/set-misc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:05,580 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/cloudflare/lua-resty-logger-socket.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:06,841 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-resty-logger-socket1, universal_newlines=False, shell=None)
+2017-05-02 23:11:06,929 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/simpl/ngx_devel_kit.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:08,167 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-devel-kit-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:08,219 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/echo-nginx-module.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:09,536 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/echo-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:09,605 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/openresty/lua-resty-core.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:10,864 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-resty-core, universal_newlines=False, shell=None)
+2017-05-02 23:11:10,927 - DEBUG - Popen(['git', 'ls-remote', 'https://github.com/cloudflare/lua-resty-logger-socket.git'], cwd=/build/ngxc, universal_newlines=False, shell=None)
+2017-05-02 23:11:12,167 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/library/lua-resty-logger-socket2, universal_newlines=False, shell=None)
+[1;92m outdated [0m: luajit http://luajit.org/git/luajit-2.0.git
+[1;92m outdated [0m: atomic_ops https://github.com/ivmai/libatomic_ops.git
+[1;92m outdated [0m: openssl https://github.com/openssl/openssl.git
+There is/are outdated packages. Go ahead to update? [Y/n] 2017-05-02 23:11:16,325 - DEBUG - Reset the buildroot /build/BUILDROOT
+2017-05-02 23:11:16,990 - DEBUG - not exists: /build/BUILDROOT
+2017-05-02 23:11:16,990 - DEBUG - not exists: /build/BUILDROOT/vm
+2017-05-02 23:11:16,990 - DEBUG - not exists: /build/BUILDROOT/vm/include
+2017-05-02 23:11:16,990 - DEBUG - not exists: /build/BUILDROOT/vm/lib
+2017-05-02 23:11:16,991 - DEBUG - [nginx] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:16,991 - INFO - Fetching http://nginx.org/download/nginx-1.12.0.tar.gz
+2017-05-02 23:11:17,344 - DEBUG - untar: /build/SOURCES/nginx-1.12.0.tar.gz
+2017-05-02 23:11:17,445 - DEBUG - [zlib] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:17,445 - INFO - Fetching https://github.com/Dead2/zlib-ng.git
+2017-05-02 23:11:17,445 - INFO - zlib - develop - https://github.com/Dead2/zlib-ng.git
+2017-05-02 23:11:17,446 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/zlib]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:11:18,775 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/develop', '--'], cwd=/build/SOURCES/library/zlib, universal_newlines=False, shell=None)
+2017-05-02 23:11:18,779 - DEBUG - Clean untracked files
+2017-05-02 23:11:18,779 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/zlib, universal_newlines=False, shell=None)
+2017-05-02 23:11:18,783 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/zlib, universal_newlines=False, shell=None)
+2017-05-02 23:11:18,785 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'develop'], cwd=/build/SOURCES/library/zlib, universal_newlines=True, shell=None)
+2017-05-02 23:11:20,011 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:20,012 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/zlib, universal_newlines=False, shell=None)
+2017-05-02 23:11:20,015 - INFO - develop - HEAD is now at 75e76ee
+2017-05-02 23:11:20,016 - DEBUG - [openssl] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:20,016 - INFO - Fetching https://github.com/openssl/openssl.git
+2017-05-02 23:11:20,016 - INFO - openssl - OpenSSL_1_1_0-stable - https://github.com/openssl/openssl.git
+2017-05-02 23:11:20,016 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/openssl]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:11:22,466 - DEBUG - Popen(['git', 'reset', '--hard', 'OpenSSL_1_1_0e', '--'], cwd=/build/SOURCES/library/openssl, universal_newlines=False, shell=None)
+2017-05-02 23:11:22,587 - DEBUG - Clean untracked files
+2017-05-02 23:11:22,587 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/openssl, universal_newlines=False, shell=None)
+2017-05-02 23:11:22,762 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/openssl, universal_newlines=False, shell=None)
+2017-05-02 23:11:22,765 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'OpenSSL_1_1_0e'], cwd=/build/SOURCES/library/openssl, universal_newlines=True, shell=None)
+2017-05-02 23:11:25,046 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/openssl, universal_newlines=False, shell=None)
+2017-05-02 23:11:25,049 - INFO - OpenSSL_1_1_0-stable - HEAD is now at 0453163
+2017-05-02 23:11:25,050 - DEBUG - [libpcre] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:25,050 - INFO - Fetching https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz
+2017-05-02 23:11:26,713 - DEBUG - untar: /build/SOURCES/library/pcre-8.40.tar.gz
+2017-05-02 23:11:26,873 - DEBUG - [1;31m--------- nginx [False] ---------[0m
+2017-05-02 23:11:26,873 - DEBUG - [1;31m--------- libpcre [False] ---------[0m
+2017-05-02 23:11:26,874 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:26,874 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/pcre-8.40]: "[1;92msudo apt-get -y --force-yes install libreadline-dev[0m"
+2017-05-02 23:11:26,874 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:26,874 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/pcre-8.40]: "[1;92msudo apt-get -y --force-yes install libbz2-dev[0m"
+2017-05-02 23:11:26,874 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:26,874 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:26,874 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:26,874 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/pcre-8.40]: "[1;92m./configure --prefix=/build/BUILDROOT/vm --enable-static --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-jit[0m"
+2017-05-02 23:11:26,874 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:26,874 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:26,875 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:26,875 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/pcre-8.40]: "[1;92mmake -j 4 install-strip[0m"
+2017-05-02 23:11:26,875 - DEBUG - [1;31m--------- libpcre [True] ---------[0m
+2017-05-02 23:11:26,875 - DEBUG - [1;31m--------- libpcre [True] ---------[0m
+2017-05-02 23:11:26,875 - DEBUG - not exists: /build/BUILDROOT/vm/lib/lua_objs
+2017-05-02 23:11:26,875 - DEBUG - [1;31m--------- lua-resty-logger-socket2 [False] ---------[0m
+2017-05-02 23:11:26,875 - DEBUG - [1;31m--------- luajit [False] ---------[0m
+2017-05-02 23:11:26,875 - DEBUG - [luajit] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:26,875 - INFO - Fetching http://luajit.org/git/luajit-2.0.git
+2017-05-02 23:11:26,875 - INFO - luajit - v2.1 - http://luajit.org/git/luajit-2.0.git
+2017-05-02 23:11:26,875 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/luajit]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/pcre-8.40
+/build/BUILDROOT/pcre-8.40
+Fetching origin
+2017-05-02 23:11:27,937 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/v2.1', '--'], cwd=/build/SOURCES/library/luajit, universal_newlines=False, shell=None)
+2017-05-02 23:11:27,960 - DEBUG - Clean untracked files
+2017-05-02 23:11:27,961 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/luajit, universal_newlines=False, shell=None)
+2017-05-02 23:11:28,001 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/luajit, universal_newlines=False, shell=None)
+2017-05-02 23:11:28,003 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'v2.1'], cwd=/build/SOURCES/library/luajit, universal_newlines=True, shell=None)
+2017-05-02 23:11:30,015 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:30,016 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/luajit, universal_newlines=False, shell=None)
+2017-05-02 23:11:30,019 - INFO - v2.1 - HEAD is now at 8271c64
+2017-05-02 23:11:30,019 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/luajit/ /build/BUILDROOT/luajit-1493665381-8271c64[0m"
+2017-05-02 23:11:30,371 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,372 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho -std=gnu99 -DLUAJIT_ENABLE_LUA52COMPAT -DLUAJIT_NUMMODE=2[0m"
+2017-05-02 23:11:30,375 - DEBUG - > Update Current Unit Env by: {'CFLAGS': '-std=gnu99 -DLUAJIT_ENABLE_LUA52COMPAT -DLUAJIT_NUMMODE=2'}
+2017-05-02 23:11:30,375 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,375 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92msed -i 's|\(export PREFIX=.*\)|# \1|' Makefile[0m"
+2017-05-02 23:11:30,375 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,375 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92msed -i 's|\(INSTALL_INC=\).*|\1${VM_LUA_INCLUDE_PATH}|' Makefile[0m"
+2017-05-02 23:11:30,375 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,375 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92msed -i 's|\(INSTALL_LMOD=\).*|\1${VM_LUA_CMODULE_PATH}|' Makefile[0m"
+2017-05-02 23:11:30,376 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,376 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92msed -i 's|\(INSTALL_CMOD=\).*|\1${VM_LUA_CMODULE_PATH}|' Makefile[0m"
+2017-05-02 23:11:30,376 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,376 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92msed -i 's|@echo " \($(SYMLINK) $(INSTALL_TNAME) $(INSTALL_TSYM)\)"|\1|' Makefile[0m"
+2017-05-02 23:11:30,376 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,376 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib -std=gnu99 -DLUAJIT_ENABLE_LUA52COMPAT -DLUAJIT_NUMMODE=2
+2017-05-02 23:11:30,376 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:30,376 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mmake -j 4 [0m"
+2017-05-02 23:11:30,376 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:30,376 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib -std=gnu99 -DLUAJIT_ENABLE_LUA52COMPAT -DLUAJIT_NUMMODE=2
+2017-05-02 23:11:30,376 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:30,376 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mmake -j 4 install[0m"
+2017-05-02 23:11:30,376 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho $(grep ABIVER= Makefile | sed 's,ABIVER=,,' | xargs echo -n)[0m"
+/build/BUILDROOT/luajit-1493665381-8271c64
+/build/BUILDROOT/luajit-1493665381-8271c64
+2017-05-02 23:11:30,401 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${VM_LUA_CMODULE_PATH}[0m"
+2017-05-02 23:11:30,404 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${VM_LUA_INCLUDE_PATH}[0m"
+2017-05-02 23:11:30,406 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${LUAJIT_INC}[0m"
+2017-05-02 23:11:30,409 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${LUAJIT_LIB}[0m"
+2017-05-02 23:11:30,412 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${LUAJIT_LIB}[0m"
+2017-05-02 23:11:30,415 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${LUAJIT_LIB}[0m"
+2017-05-02 23:11:30,418 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${LUAJIT_LIB}/?.lua[0m"
+2017-05-02 23:11:30,421 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/luajit-1493665381-8271c64]: "[1;92mecho ${LUAJIT_LIB}/?.so[0m"
+2017-05-02 23:11:30,424 - DEBUG - [1;31m--------- lua-nginx-module [False] ---------[0m
+2017-05-02 23:11:30,424 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:30,424 - DEBUG - [1;31m--------- ngx-devel-kit-module [False] ---------[0m
+2017-05-02 23:11:30,424 - DEBUG - [ngx-devel-kit-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:30,424 - INFO - Fetching https://github.com/simpl/ngx_devel_kit.git
+2017-05-02 23:11:30,424 - INFO - ngx-devel-kit-module - master - https://github.com/simpl/ngx_devel_kit.git
+2017-05-02 23:11:30,425 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/ngx-devel-kit-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:11:31,858 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/ngx-devel-kit-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:31,883 - DEBUG - Clean untracked files
+2017-05-02 23:11:31,883 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/ngx-devel-kit-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:31,892 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/ngx-devel-kit-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:31,898 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/ngx-devel-kit-module, universal_newlines=True, shell=None)
+2017-05-02 23:11:33,101 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:33,102 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/ngx-devel-kit-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:33,105 - INFO - master - HEAD is now at e443262
+2017-05-02 23:11:33,106 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/ngx-devel-kit-module/ /build/BUILDROOT/ngx-devel-kit-module-1462829312-e443262[0m"
+2017-05-02 23:11:33,170 - DEBUG - [lua-nginx-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:33,170 - INFO - Fetching https://github.com/openresty/lua-nginx-module.git
+2017-05-02 23:11:33,170 - INFO - lua-nginx-module - master - https://github.com/openresty/lua-nginx-module.git
+2017-05-02 23:11:33,171 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/lua-nginx-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:11:34,989 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/lua-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:35,027 - DEBUG - Clean untracked files
+2017-05-02 23:11:35,027 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/lua-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:35,081 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/lua-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:35,084 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/lua-nginx-module, universal_newlines=True, shell=None)
+2017-05-02 23:11:36,797 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:36,798 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/lua-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:36,801 - INFO - master - HEAD is now at c034626
+2017-05-02 23:11:36,801 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/lua-nginx-module/ /build/BUILDROOT/lua-nginx-module-1493412681-c034626[0m"
+2017-05-02 23:11:37,037 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:37,037 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-nginx-module-1493412681-c034626]: "[1;92mgit cherry-pick 31aee768d856f7dfabe069d220c003fad0c67fa1[0m"
+2017-05-02 23:11:37,037 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:37,037 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-nginx-module-1493412681-c034626]: "[1;92mgit cherry-pick 12a56fef7db3d9df6a0df6ab91a9e7c38bace4ea[0m"
+2017-05-02 23:11:37,038 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:37,038 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-nginx-module-1493412681-c034626]: "[1;92mgit cherry-pick 2311024b02033cdb9e16e3ffe6870f43bde17301[0m"
+2017-05-02 23:11:37,038 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:37,038 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-nginx-module-1493412681-c034626]: "[1;92mgit cherry-pick d14f90ed98c3c5152f4bbb52e29fd089379e21a2[0m"
+2017-05-02 23:11:37,038 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:37,038 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-nginx-module-1493412681-c034626]: "[1;92mgit cherry-pick d0939519511d77c73b99753ee2c77369d349cc9e[0m"
+2017-05-02 23:11:37,038 - DEBUG - [lua-resty-logger-socket2] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:37,038 - INFO - Fetching https://github.com/cloudflare/lua-resty-logger-socket.git
+2017-05-02 23:11:37,038 - INFO - lua-resty-logger-socket2 - master - https://github.com/cloudflare/lua-resty-logger-socket.git
+2017-05-02 23:11:37,038 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-resty-logger-socket2]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:11:38,290 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-resty-logger-socket2, universal_newlines=False, shell=None)
+2017-05-02 23:11:38,308 - DEBUG - Clean untracked files
+2017-05-02 23:11:38,308 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-resty-logger-socket2, universal_newlines=False, shell=None)
+2017-05-02 23:11:38,324 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-resty-logger-socket2, universal_newlines=False, shell=None)
+2017-05-02 23:11:38,327 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-resty-logger-socket2, universal_newlines=True, shell=None)
+2017-05-02 23:11:39,569 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:39,570 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-resty-logger-socket2, universal_newlines=False, shell=None)
+2017-05-02 23:11:39,573 - INFO - master - HEAD is now at 15cc1c2
+2017-05-02 23:11:39,573 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-resty-logger-socket2/ /build/BUILDROOT/lua-resty-logger-socket2-1492485858-15cc1c2[0m"
+2017-05-02 23:11:39,642 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:39,642 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:39,642 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:39,642 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-resty-logger-socket2-1492485858-15cc1c2]: "[1;92mmkdir -p ${VM_LUA_CMODULE_PATH}/resty/logger[0m"
+2017-05-02 23:11:39,643 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:39,643 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:39,643 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:39,643 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-resty-logger-socket2-1492485858-15cc1c2]: "[1;92mcp -pva lib/resty/logger/socket.lua ${VM_LUA_CMODULE_PATH}/resty/logger/socket2.lua[0m"
+2017-05-02 23:11:39,643 - DEBUG - [1;31m--------- lua-resty-core [False] ---------[0m
+2017-05-02 23:11:39,643 - DEBUG - [1;31m--------- lua-resty-lrucache [False] ---------[0m
+2017-05-02 23:11:39,643 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:39,643 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:11:39,643 - DEBUG - [lua-resty-lrucache] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:39,643 - INFO - Fetching https://github.com/openresty/lua-resty-lrucache.git
+2017-05-02 23:11:39,643 - INFO - lua-resty-lrucache - master - https://github.com/openresty/lua-resty-lrucache.git
+2017-05-02 23:11:39,643 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-resty-lrucache]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-resty-logger-socket2-1492485858-15cc1c2
+/build/BUILDROOT/lua-resty-logger-socket2-1492485858-15cc1c2
+Fetching origin
+2017-05-02 23:11:40,981 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-resty-lrucache, universal_newlines=False, shell=None)
+2017-05-02 23:11:41,002 - DEBUG - Clean untracked files
+2017-05-02 23:11:41,003 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-resty-lrucache, universal_newlines=False, shell=None)
+2017-05-02 23:11:41,008 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-resty-lrucache, universal_newlines=False, shell=None)
+2017-05-02 23:11:41,011 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-resty-lrucache, universal_newlines=True, shell=None)
+2017-05-02 23:11:42,285 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:42,286 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-resty-lrucache, universal_newlines=False, shell=None)
+2017-05-02 23:11:42,289 - INFO - master - HEAD is now at 1fe9f3b
+2017-05-02 23:11:42,289 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-resty-lrucache/ /build/BUILDROOT/lua-resty-lrucache-1491690927-1fe9f3b[0m"
+2017-05-02 23:11:42,424 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:42,424 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:42,424 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:42,424 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/lua-resty-lrucache-1491690927-1fe9f3b]: "[1;92mmake -j 4 install[0m"
+2017-05-02 23:11:42,424 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:42,424 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:11:42,424 - DEBUG - [lua-resty-core] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:42,424 - INFO - Fetching https://github.com/openresty/lua-resty-core.git
+2017-05-02 23:11:42,424 - INFO - lua-resty-core - master - https://github.com/openresty/lua-resty-core.git
+2017-05-02 23:11:42,425 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-resty-core]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-resty-lrucache-1491690927-1fe9f3b
+Fetching origin
+2017-05-02 23:11:43,968 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-resty-core, universal_newlines=False, shell=None)
+2017-05-02 23:11:43,984 - DEBUG - Clean untracked files
+2017-05-02 23:11:43,984 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-resty-core, universal_newlines=False, shell=None)
+2017-05-02 23:11:44,017 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-resty-core, universal_newlines=False, shell=None)
+2017-05-02 23:11:44,021 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-resty-core, universal_newlines=True, shell=None)
+2017-05-02 23:11:45,468 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:45,469 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-resty-core, universal_newlines=False, shell=None)
+2017-05-02 23:11:45,473 - INFO - master - HEAD is now at 42f3b41
+2017-05-02 23:11:45,473 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-resty-core/ /build/BUILDROOT/lua-resty-core-1493670896-42f3b41[0m"
+2017-05-02 23:11:45,581 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:45,581 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:45,581 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:45,581 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/lua-resty-core-1493670896-42f3b41]: "[1;92mmake -j 4 install[0m"
+2017-05-02 23:11:45,581 - DEBUG - [1;31m--------- lua-resty-logger-socket1 [False] ---------[0m
+2017-05-02 23:11:45,581 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:45,581 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:11:45,581 - DEBUG - [lua-resty-logger-socket1] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:45,581 - INFO - Fetching https://github.com/cloudflare/lua-resty-logger-socket.git
+2017-05-02 23:11:45,581 - INFO - lua-resty-logger-socket1 - master - https://github.com/cloudflare/lua-resty-logger-socket.git
+2017-05-02 23:11:45,582 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-resty-logger-socket1]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-resty-core-1493670896-42f3b41
+Fetching origin
+2017-05-02 23:11:46,810 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-resty-logger-socket1, universal_newlines=False, shell=None)
+2017-05-02 23:11:46,814 - DEBUG - Clean untracked files
+2017-05-02 23:11:46,814 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-resty-logger-socket1, universal_newlines=False, shell=None)
+2017-05-02 23:11:46,839 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-resty-logger-socket1, universal_newlines=False, shell=None)
+2017-05-02 23:11:46,842 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-resty-logger-socket1, universal_newlines=True, shell=None)
+2017-05-02 23:11:48,093 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:48,093 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-resty-logger-socket1, universal_newlines=False, shell=None)
+2017-05-02 23:11:48,096 - INFO - master - HEAD is now at 15cc1c2
+2017-05-02 23:11:48,097 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-resty-logger-socket1/ /build/BUILDROOT/lua-resty-logger-socket1-1492485858-15cc1c2[0m"
+2017-05-02 23:11:48,147 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:48,147 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:48,147 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:48,147 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-resty-logger-socket1-1492485858-15cc1c2]: "[1;92mmkdir -p ${VM_LUA_CMODULE_PATH}/resty/logger[0m"
+2017-05-02 23:11:48,147 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:48,147 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:48,147 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:48,147 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-resty-logger-socket1-1492485858-15cc1c2]: "[1;92mcp -pva lib/resty/logger/socket.lua ${VM_LUA_CMODULE_PATH}/resty/logger/socket1.lua[0m"
+2017-05-02 23:11:48,147 - DEBUG - [1;31m--------- lua-cjson [False] ---------[0m
+2017-05-02 23:11:48,147 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:48,147 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:11:48,148 - DEBUG - [lua-cjson] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:48,148 - INFO - Fetching https://github.com/openresty/lua-cjson.git
+2017-05-02 23:11:48,148 - INFO - lua-cjson - master - https://github.com/openresty/lua-cjson.git
+2017-05-02 23:11:48,148 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-cjson]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-resty-logger-socket1-1492485858-15cc1c2
+/build/BUILDROOT/lua-resty-logger-socket1-1492485858-15cc1c2
+Fetching origin
+2017-05-02 23:11:49,439 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-cjson, universal_newlines=False, shell=None)
+2017-05-02 23:11:49,466 - DEBUG - Clean untracked files
+2017-05-02 23:11:49,466 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-cjson, universal_newlines=False, shell=None)
+2017-05-02 23:11:49,481 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-cjson, universal_newlines=False, shell=None)
+2017-05-02 23:11:49,484 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-cjson, universal_newlines=True, shell=None)
+2017-05-02 23:11:50,730 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:50,730 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-cjson, universal_newlines=False, shell=None)
+2017-05-02 23:11:50,734 - INFO - master - HEAD is now at 9bfa7ea
+2017-05-02 23:11:50,734 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-cjson/ /build/BUILDROOT/lua-cjson-1491847283-9bfa7ea[0m"
+2017-05-02 23:11:50,787 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:50,787 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-cjson-1491847283-9bfa7ea]: "[1;92msed -i 's|\(^PREFIX =\)|#\1|' Makefile[0m"
+2017-05-02 23:11:50,787 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:50,788 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-cjson-1491847283-9bfa7ea]: "[1;92msed -i 's|\(^LUA_VERSION =\)|#\1|' Makefile[0m"
+2017-05-02 23:11:50,788 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:50,788 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:50,788 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:50,788 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/lua-cjson-1491847283-9bfa7ea]: "[1;92mmake -j 4 install[0m"
+2017-05-02 23:11:50,788 - DEBUG - [1;31m--------- lua-resty-lrucache [True] ---------[0m
+2017-05-02 23:11:50,788 - DEBUG - [1;31m--------- lua-resty-iputils [False] ---------[0m
+2017-05-02 23:11:50,788 - DEBUG - [1;31m--------- lua-resty-lrucache [True] ---------[0m
+2017-05-02 23:11:50,788 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:50,788 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:11:50,788 - DEBUG - [lua-resty-iputils] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:50,788 - INFO - Fetching https://github.com/hamishforbes/lua-resty-iputils.git
+2017-05-02 23:11:50,788 - INFO - lua-resty-iputils - master - https://github.com/hamishforbes/lua-resty-iputils.git
+2017-05-02 23:11:50,789 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-resty-iputils]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-cjson-1491847283-9bfa7ea
+Fetching origin
+2017-05-02 23:11:52,037 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-resty-iputils, universal_newlines=False, shell=None)
+2017-05-02 23:11:52,041 - DEBUG - Clean untracked files
+2017-05-02 23:11:52,042 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-resty-iputils, universal_newlines=False, shell=None)
+2017-05-02 23:11:52,058 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-resty-iputils, universal_newlines=False, shell=None)
+2017-05-02 23:11:52,061 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-resty-iputils, universal_newlines=True, shell=None)
+2017-05-02 23:11:53,320 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:53,321 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-resty-iputils, universal_newlines=False, shell=None)
+2017-05-02 23:11:53,324 - INFO - master - HEAD is now at 6110b41
+2017-05-02 23:11:53,324 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-resty-iputils/ /build/BUILDROOT/lua-resty-iputils-1490713694-6110b41[0m"
+2017-05-02 23:11:53,385 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:53,385 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:53,385 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:53,385 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/lua-resty-iputils-1490713694-6110b41]: "[1;92mmake -j 4 install[0m"
+2017-05-02 23:11:53,385 - DEBUG - [1;31m--------- lua-resty-logger-socket0 [False] ---------[0m
+2017-05-02 23:11:53,386 - DEBUG - [1;31m--------- luajit [True] ---------[0m
+2017-05-02 23:11:53,386 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:11:53,386 - DEBUG - [lua-resty-logger-socket0] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:53,386 - INFO - Fetching https://github.com/cloudflare/lua-resty-logger-socket.git
+2017-05-02 23:11:53,386 - INFO - lua-resty-logger-socket0 - master - https://github.com/cloudflare/lua-resty-logger-socket.git
+2017-05-02 23:11:53,386 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/library/lua-resty-logger-socket0]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-resty-iputils-1490713694-6110b41
+Fetching origin
+2017-05-02 23:11:54,597 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/library/lua-resty-logger-socket0, universal_newlines=False, shell=None)
+2017-05-02 23:11:54,600 - DEBUG - Clean untracked files
+2017-05-02 23:11:54,601 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/library/lua-resty-logger-socket0, universal_newlines=False, shell=None)
+2017-05-02 23:11:54,605 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/library/lua-resty-logger-socket0, universal_newlines=False, shell=None)
+2017-05-02 23:11:54,609 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/library/lua-resty-logger-socket0, universal_newlines=True, shell=None)
+2017-05-02 23:11:55,868 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:55,868 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/library/lua-resty-logger-socket0, universal_newlines=False, shell=None)
+2017-05-02 23:11:55,872 - INFO - master - HEAD is now at 15cc1c2
+2017-05-02 23:11:55,872 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/lua-resty-logger-socket0/ /build/BUILDROOT/lua-resty-logger-socket0-1492485858-15cc1c2[0m"
+2017-05-02 23:11:55,976 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:55,977 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:55,977 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:55,977 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-resty-logger-socket0-1492485858-15cc1c2]: "[1;92mmkdir -p ${VM_LUA_CMODULE_PATH}/resty/logger[0m"
+2017-05-02 23:11:55,977 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:11:55,977 - DEBUG - > CFLAGS: -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:11:55,977 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:11:55,977 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/lua-resty-logger-socket0-1492485858-15cc1c2]: "[1;92mcp -pva lib/resty/logger/socket.lua ${VM_LUA_CMODULE_PATH}/resty/logger/socket0.lua[0m"
+2017-05-02 23:11:55,978 - DEBUG - [1;31m--------- set-misc-nginx-module [False] ---------[0m
+2017-05-02 23:11:55,978 - DEBUG - [1;31m--------- ngx-devel-kit-module [True] ---------[0m
+2017-05-02 23:11:55,978 - DEBUG - [set-misc-nginx-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:55,978 - INFO - Fetching https://github.com/openresty/set-misc-nginx-module.git
+2017-05-02 23:11:55,978 - INFO - set-misc-nginx-module - master - https://github.com/openresty/set-misc-nginx-module.git
+2017-05-02 23:11:55,978 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/set-misc-nginx-module]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/lua-resty-logger-socket0-1492485858-15cc1c2
+/build/BUILDROOT/lua-resty-logger-socket0-1492485858-15cc1c2
+Fetching origin
+2017-05-02 23:11:57,243 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/set-misc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:57,256 - DEBUG - Clean untracked files
+2017-05-02 23:11:57,256 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/set-misc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:57,261 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/set-misc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:57,264 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/set-misc-nginx-module, universal_newlines=True, shell=None)
+2017-05-02 23:11:58,520 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:11:58,521 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/set-misc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:58,524 - INFO - master - HEAD is now at 4890834
+2017-05-02 23:11:58,524 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/set-misc-nginx-module/ /build/BUILDROOT/set-misc-nginx-module-1482098876-4890834[0m"
+2017-05-02 23:11:58,575 - DEBUG - [1;31m--------- echo-nginx-module [False] ---------[0m
+2017-05-02 23:11:58,576 - DEBUG - [echo-nginx-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:11:58,576 - INFO - Fetching https://github.com/openresty/echo-nginx-module.git
+2017-05-02 23:11:58,576 - INFO - echo-nginx-module - master - https://github.com/openresty/echo-nginx-module.git
+2017-05-02 23:11:58,576 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/echo-nginx-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:11:59,823 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/echo-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:59,827 - DEBUG - Clean untracked files
+2017-05-02 23:11:59,827 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/echo-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:59,831 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/echo-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:11:59,835 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/echo-nginx-module, universal_newlines=True, shell=None)
+2017-05-02 23:12:01,110 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:01,110 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/echo-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:01,114 - INFO - master - HEAD is now at 7740e11
+2017-05-02 23:12:01,114 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/echo-nginx-module/ /build/BUILDROOT/echo-nginx-module-1492809871-7740e11[0m"
+2017-05-02 23:12:01,169 - DEBUG - [1;31m--------- ngx-brotli-module [False] ---------[0m
+2017-05-02 23:12:01,169 - DEBUG - [ngx-brotli-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:12:01,169 - INFO - Fetching https://github.com/google/ngx_brotli.git
+2017-05-02 23:12:01,169 - INFO - ngx-brotli-module - master - https://github.com/google/ngx_brotli.git
+2017-05-02 23:12:01,171 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/ngx-brotli-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:01,207 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli, universal_newlines=False, shell=None)
+2017-05-02 23:12:01,210 - DEBUG - Popen(['git', 'fetch', '--progress', '-v', 'origin'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli, universal_newlines=True, shell=None)
+2017-05-02 23:12:03,676 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli, universal_newlines=False, shell=None)
+2017-05-02 23:12:03,680 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli, universal_newlines=False, shell=None)
+2017-05-02 23:12:03,684 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli, universal_newlines=False, shell=None)
+2017-05-02 23:12:03,695 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/terryfy, universal_newlines=False, shell=None)
+2017-05-02 23:12:03,698 - DEBUG - Popen(['git', 'fetch', '--progress', '-v', 'origin'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/terryfy, universal_newlines=True, shell=None)
+2017-05-02 23:12:05,055 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/terryfy, universal_newlines=False, shell=None)
+2017-05-02 23:12:05,059 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/terryfy, universal_newlines=False, shell=None)
+2017-05-02 23:12:05,062 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/terryfy, universal_newlines=False, shell=None)
+2017-05-02 23:12:05,104 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/research/esaxx, universal_newlines=False, shell=None)
+2017-05-02 23:12:05,107 - DEBUG - Popen(['git', 'fetch', '--progress', '-v', 'origin'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/research/esaxx, universal_newlines=True, shell=None)
+2017-05-02 23:12:06,380 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/research/esaxx, universal_newlines=False, shell=None)
+2017-05-02 23:12:06,384 - DEBUG - Popen(['git', 'cat-file', '--batch-check'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/research/esaxx, universal_newlines=False, shell=None)
+2017-05-02 23:12:06,387 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/ngx-brotli-module/deps/brotli/research/esaxx, universal_newlines=False, shell=None)
+2017-05-02 23:12:06,456 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/ngx-brotli-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:12:07,960 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/ngx-brotli-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:08,477 - DEBUG - Clean untracked files
+2017-05-02 23:12:08,477 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/ngx-brotli-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:08,544 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/ngx-brotli-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:08,547 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/ngx-brotli-module, universal_newlines=True, shell=None)
+2017-05-02 23:12:09,788 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:09,789 - INFO - master - HEAD is now at bfd2885
+2017-05-02 23:12:09,789 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/ngx-brotli-module/ /build/BUILDROOT/ngx-brotli-module-1480718477-bfd2885[0m"
+2017-05-02 23:12:10,321 - DEBUG - [1;31m--------- ngx-http-dyups-module [False] ---------[0m
+2017-05-02 23:12:10,321 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:12:10,321 - DEBUG - [ngx-http-dyups-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:12:10,321 - INFO - Fetching https://github.com/yzprofile/ngx_http_dyups_module.git
+2017-05-02 23:12:10,321 - INFO - ngx-http-dyups-module - master - https://github.com/yzprofile/ngx_http_dyups_module.git
+2017-05-02 23:12:10,321 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/ngx-http-dyups-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:12:11,645 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/ngx-http-dyups-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:11,649 - DEBUG - Clean untracked files
+2017-05-02 23:12:11,649 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/ngx-http-dyups-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:11,654 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/ngx-http-dyups-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:11,658 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/ngx-http-dyups-module, universal_newlines=True, shell=None)
+2017-05-02 23:12:13,281 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:13,282 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/ngx-http-dyups-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:13,286 - INFO - master - HEAD is now at 8a7a60f
+2017-05-02 23:12:13,286 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/ngx-http-dyups-module/ /build/BUILDROOT/ngx-http-dyups-module-1488289759-8a7a60f[0m"
+2017-05-02 23:12:13,353 - DEBUG - [1;31m--------- srcache-nginx-module [False] ---------[0m
+2017-05-02 23:12:13,353 - DEBUG - [srcache-nginx-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:12:13,354 - INFO - Fetching https://github.com/openresty/srcache-nginx-module.git
+2017-05-02 23:12:13,354 - INFO - srcache-nginx-module - master - https://github.com/openresty/srcache-nginx-module.git
+2017-05-02 23:12:13,354 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/srcache-nginx-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:12:14,829 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/srcache-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:14,833 - DEBUG - Clean untracked files
+2017-05-02 23:12:14,833 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/srcache-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:14,839 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/srcache-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:14,842 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/srcache-nginx-module, universal_newlines=True, shell=None)
+2017-05-02 23:12:16,088 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:16,090 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/srcache-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:16,093 - INFO - master - HEAD is now at af82f75
+2017-05-02 23:12:16,093 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/srcache-nginx-module/ /build/BUILDROOT/srcache-nginx-module-1469595125-af82f75[0m"
+2017-05-02 23:12:16,157 - DEBUG - [1;31m--------- memc-nginx-module [False] ---------[0m
+2017-05-02 23:12:16,158 - DEBUG - [memc-nginx-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:12:16,158 - INFO - Fetching https://github.com/openresty/memc-nginx-module.git
+2017-05-02 23:12:16,158 - INFO - memc-nginx-module - master - https://github.com/openresty/memc-nginx-module.git
+2017-05-02 23:12:16,158 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/memc-nginx-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:12:17,476 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/memc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:17,490 - DEBUG - Clean untracked files
+2017-05-02 23:12:17,490 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/memc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:17,496 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/memc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:17,499 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/memc-nginx-module, universal_newlines=True, shell=None)
+2017-05-02 23:12:18,707 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:18,708 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/memc-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:18,711 - INFO - master - HEAD is now at 4c82d10
+2017-05-02 23:12:18,711 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/memc-nginx-module/ /build/BUILDROOT/memc-nginx-module-1491692544-4c82d10[0m"
+2017-05-02 23:12:18,782 - DEBUG - [1;31m--------- ngx-devel-kit-module [True] ---------[0m
+2017-05-02 23:12:18,782 - DEBUG - [1;31m--------- lua-nginx-module [True] ---------[0m
+2017-05-02 23:12:18,782 - DEBUG - [1;31m--------- nginx-ct [False] ---------[0m
+2017-05-02 23:12:18,782 - DEBUG - [1;31m--------- openssl [False] ---------[0m
+2017-05-02 23:12:18,782 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/openssl/ /build/BUILDROOT/openssl-1487246299-0453163[0m"
+2017-05-02 23:12:24,768 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,768 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mecho threads zlib enable-multiblock no-dso no-err no-unit-test no-ui enable-sock no-rdrand no-egd[0m"
+2017-05-02 23:12:24,823 - DEBUG - > Update Current Unit Env by: {'SSL_INTERNAL': 'threads zlib enable-multiblock no-dso no-err no-unit-test no-ui enable-sock no-rdrand no-egd'}
+2017-05-02 23:12:24,823 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,823 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mecho enable-chacha enable-ec_nistp_64_gcc_128 enable-ecdsa enable-poly1305 enable-ct enable-camellia enable-md2 enable-rc5 enable-idea enable-mdc2 no-weak-ssl-ciphers no-heartbeats no-deprecated no-ssl no-ssl3 no-ssl3-method[0m"
+2017-05-02 23:12:24,826 - DEBUG - > Update Current Unit Env by: {'SSL_CIPHERS': 'enable-chacha enable-ec_nistp_64_gcc_128 enable-ecdsa enable-poly1305 enable-ct enable-camellia enable-md2 enable-rc5 enable-idea enable-mdc2 no-weak-ssl-ciphers no-heartbeats no-deprecated no-ssl no-ssl3 no-ssl3-method'}
+2017-05-02 23:12:24,827 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,827 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mecho enable-static-engine enable-afalgeng no-capieng enable-async enable-ocsp enable-psk enable-rfc3779[0m"
+2017-05-02 23:12:24,830 - DEBUG - > Update Current Unit Env by: {'SSL_ENGINES': 'enable-static-engine enable-afalgeng no-capieng enable-async enable-ocsp enable-psk enable-rfc3779'}
+2017-05-02 23:12:24,830 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,830 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mecho enable-srtp enable-ts no-sctp no-nextprotoneg[0m"
+2017-05-02 23:12:24,833 - DEBUG - > Update Current Unit Env by: {'SSL_PROTOCOLS': 'enable-srtp enable-ts no-sctp no-nextprotoneg'}
+2017-05-02 23:12:24,834 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,834 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mecho no-hw no-engine[0m"
+2017-05-02 23:12:24,838 - DEBUG - > Update Current Unit Env by: {'SSL_HW': 'no-hw no-engine'}
+2017-05-02 23:12:24,838 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,838 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mecho no-fuzz-libfuzzer no-fuzz-afl no-asan no-ubsan[0m"
+2017-05-02 23:12:24,841 - DEBUG - > Update Current Unit Env by: {'SSL_DEV': 'no-fuzz-libfuzzer no-fuzz-afl no-asan no-ubsan'}
+2017-05-02 23:12:24,842 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,842 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:12:24,842 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:24,842 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92m./config --test-sanity[0m"
+2017-05-02 23:12:24,842 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,842 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:12:24,842 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:24,842 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92m./config --prefix=${PREFIX} --openssldir=${PREFIX} -Wl,-L${VM_LIBRARY_PATH} -Wl,-rpath=${VM_LIBRARY_PATH} -I${VM_INCLUDE_PATH} --api=1.0.0 shared enable-pic ${SSL_INTERNAL} ${SSL_CIPHERS} ${SSL_ENGINES} ${SSL_PROTOCOLS} ${SSL_HW} ${SSL_DEV}[0m"
+2017-05-02 23:12:24,842 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,842 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:12:24,842 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:24,842 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mLD_LIBRARY_PATH=$(pwd) make[0m"
+2017-05-02 23:12:24,842 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,842 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:12:24,842 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:24,842 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mLD_LIBRARY_PATH=$(pwd) make test[0m"
+2017-05-02 23:12:24,843 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:24,843 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib
+2017-05-02 23:12:24,843 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:24,843 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/openssl-1487246299-0453163]: "[1;92mmake -j 4 install_sw[0m"
+2017-05-02 23:12:24,843 - DEBUG - [nginx-ct] build_name is undefined. Trigger to its package process
+2017-05-02 23:12:24,843 - INFO - Fetching https://github.com/grahamedgecombe/nginx-ct.git
+2017-05-02 23:12:24,843 - INFO - nginx-ct - master - https://github.com/grahamedgecombe/nginx-ct.git
+2017-05-02 23:12:24,843 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/nginx-ct]: "[1;92mgit fetch --all --progress[0m"
+/build/BUILDROOT/openssl-1487246299-0453163
+/build/BUILDROOT/openssl-1487246299-0453163
+/build/BUILDROOT/openssl-1487246299-0453163
+/build/BUILDROOT/openssl-1487246299-0453163
+/build/BUILDROOT/openssl-1487246299-0453163
+Fetching origin
+2017-05-02 23:12:26,243 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/nginx-ct, universal_newlines=False, shell=None)
+2017-05-02 23:12:26,258 - DEBUG - Clean untracked files
+2017-05-02 23:12:26,258 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/nginx-ct, universal_newlines=False, shell=None)
+2017-05-02 23:12:26,263 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/nginx-ct, universal_newlines=False, shell=None)
+2017-05-02 23:12:26,265 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/nginx-ct, universal_newlines=True, shell=None)
+2017-05-02 23:12:27,496 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:27,496 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/nginx-ct, universal_newlines=False, shell=None)
+2017-05-02 23:12:27,500 - INFO - master - HEAD is now at e7a741a
+2017-05-02 23:12:27,501 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/nginx-ct/ /build/BUILDROOT/nginx-ct-1493318026-e7a741a[0m"
+2017-05-02 23:12:27,582 - DEBUG - [1;31m--------- headers-more-nginx-module [False] ---------[0m
+2017-05-02 23:12:27,582 - DEBUG - [headers-more-nginx-module] build_name is undefined. Trigger to its package process
+2017-05-02 23:12:27,582 - INFO - Fetching https://github.com/openresty/headers-more-nginx-module.git
+2017-05-02 23:12:27,582 - INFO - headers-more-nginx-module - master - https://github.com/openresty/headers-more-nginx-module.git
+2017-05-02 23:12:27,582 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/SOURCES/modules/headers-more-nginx-module]: "[1;92mgit fetch --all --progress[0m"
+Fetching origin
+2017-05-02 23:12:28,817 - DEBUG - Popen(['git', 'reset', '--hard', 'origin/master', '--'], cwd=/build/SOURCES/modules/headers-more-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:28,821 - DEBUG - Clean untracked files
+2017-05-02 23:12:28,822 - DEBUG - Popen(['git', 'clean', '-xdf'], cwd=/build/SOURCES/modules/headers-more-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:28,826 - DEBUG - Popen(['git', 'version'], cwd=/build/SOURCES/modules/headers-more-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:28,829 - DEBUG - Popen(['git', 'pull', '--progress', '-v', 'origin', 'master'], cwd=/build/SOURCES/modules/headers-more-nginx-module, universal_newlines=True, shell=None)
+2017-05-02 23:12:30,280 - DEBUG - Fetch head lines do not match lines provided via progress information
+length of progress lines 2 should be equal to lines in FETCH_HEAD file 1
+Will ignore extra progress lines or fetch head lines.
+2017-05-02 23:12:30,280 - DEBUG - Popen(['git', 'cat-file', '--batch'], cwd=/build/SOURCES/modules/headers-more-nginx-module, universal_newlines=False, shell=None)
+2017-05-02 23:12:30,284 - INFO - master - HEAD is now at 7b0762a
+2017-05-02 23:12:30,284 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/modules/headers-more-nginx-module/ /build/BUILDROOT/headers-more-nginx-module-1487038465-7b0762a[0m"
+2017-05-02 23:12:30,334 - DEBUG - [1;31m--------- libpcre [True] ---------[0m
+2017-05-02 23:12:30,335 - DEBUG - [1;31m--------- libpcre [True] ---------[0m
+2017-05-02 23:12:30,335 - DEBUG - [1;31m--------- libpcre [True] ---------[0m
+2017-05-02 23:12:30,335 - DEBUG - [1;31m--------- threads [False] ---------[0m
+2017-05-02 23:12:30,335 - DEBUG - [1;31m--------- file-aio [False] ---------[0m
+2017-05-02 23:12:30,336 - DEBUG - [1;31m--------- http_ssl_module [False] ---------[0m
+2017-05-02 23:12:30,337 - DEBUG - [1;31m--------- http_v2_module [False] ---------[0m
+2017-05-02 23:12:30,337 - DEBUG - [1;31m--------- http_realip_module [False] ---------[0m
+2017-05-02 23:12:30,338 - DEBUG - [1;31m--------- http_addition_module [False] ---------[0m
+2017-05-02 23:12:30,338 - DEBUG - [1;31m--------- http_gunzip_module [False] ---------[0m
+2017-05-02 23:12:30,339 - DEBUG - [1;31m--------- http_gzip_static_module [False] ---------[0m
+2017-05-02 23:12:30,339 - DEBUG - [1;31m--------- zlib [False] ---------[0m
+2017-05-02 23:12:30,339 - DEBUG - Command [shell=False, dry_run=False, pwd=.]: "[1;92mrsync -avH --delete --quiet /build/SOURCES/library/zlib/ /build/BUILDROOT/zlib-1490388983-75e76ee[0m"
+2017-05-02 23:12:30,474 - DEBUG - "[1;34m [Stage.Patch] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:30,474 - DEBUG - Command [shell=True, dry_run=True, pwd=/build/BUILDROOT/nginx-1.12.0]: "[1;92mpatch -sNt -r - -p0 -B .zlib-ng < /build/SOURCES/patches/nginx.zlib-ng.patch[0m"
+2017-05-02 23:12:30,474 - DEBUG - "[1;34m [Stage.PreBuild] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:30,475 - DEBUG - Command [shell=True, dry_run=False, pwd=/build/BUILDROOT/zlib-1490388983-75e76ee]: "[1;92mecho -O3[0m"
+2017-05-02 23:12:30,478 - DEBUG - > Update Current Unit Env by: {'CFLAGS': '-O3'}
+2017-05-02 23:12:30,478 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:30,478 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib -O3
+2017-05-02 23:12:30,478 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:30,478 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/zlib-1490388983-75e76ee]: "[1;92m./configure --prefix=/build/BUILDROOT/vm --enable-static --64 --zlib-compat[0m"
+2017-05-02 23:12:30,478 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:30,479 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib -O3
+2017-05-02 23:12:30,479 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:30,479 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/zlib-1490388983-75e76ee]: "[1;92mmake -j 4 install[0m"
+2017-05-02 23:12:30,479 - DEBUG - "[1;34m [Stage.BuildScript] [0m" PREFIX: /build/BUILDROOT/vm
+2017-05-02 23:12:30,479 - DEBUG - > CFLAGS: -fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib -O3
+2017-05-02 23:12:30,479 - DEBUG - > LDFLAGS: -L/build/BUILDROOT/vm/lib -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now
+2017-05-02 23:12:30,479 - DEBUG - Command [shell=False, dry_run=True, pwd=/build/BUILDROOT/zlib-1490388983-75e76ee]: "[1;92mmake -j 4 test[0m"
+2017-05-02 23:12:30,480 - DEBUG - [1;31m--------- http_secure_link_module [False] ---------[0m
+2017-05-02 23:12:30,480 - DEBUG - [1;31m--------- http_slice_module [False] ---------[0m
+2017-05-02 23:12:30,481 - DEBUG - [1;31m--------- http_stub_status_module [False] ---------[0m
+2017-05-02 23:12:30,482 - DEBUG - [1;31m--------- stream_ssl_preread_module [False] ---------[0m
+2017-05-02 23:12:30,482 - DEBUG - [1;31m--------- compat [False] ---------[0m
+2017-05-02 23:12:30,483 - DEBUG - [1;31m--------- pcre-jit [False] ---------[0m
+2017-05-02 23:12:30,483 - DEBUG - [1;31m--------- libpcre [True] ---------[0m
+/build/BUILDROOT/zlib-1490388983-75e76ee
+/build/BUILDROOT/zlib-1490388983-75e76ee
+/build/BUILDROOT/zlib-1490388983-75e76ee
+Traceback (most recent call last):
+  File "./ngx_auto_compile.py", line 83, in <module>
+    main(dry_run=('-d' in sys.argv))
+  File "./ngx_auto_compile.py", line 42, in main
+    ngx.run(dry_run)
+  File "/build/ngxc/ngxc/nginx.py", line 483, in run
+    self._run(dict(CFLAGS='%s' % self.__helper._fix_tfo))
+  File "/build/ngxc/ngxc/buildunit.py", line 226, in _run
+    self._pre_run()
+  File "/build/ngxc/ngxc/nginx.py", line 489, in _pre_run
+    self.__build_cmd = self.__helper.make_configure_cmd(ld_opts, extra_mod)
+  File "/build/ngxc/ngxc/nginx.py", line 346, in make_configure_cmd
+    return Command(buildcmd, cwd=self.__ngx.cwd)
+  File "/build/ngxc/ngxc/command.py", line 45, in __init__
+    self.__args = ' '.join(self.__value[1:])
+TypeError: sequence item 5: expected str instance, NoneType found

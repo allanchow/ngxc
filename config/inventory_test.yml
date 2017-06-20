@@ -1,0 +1,134 @@
+inventory:
+  library-lua:
+    - <<: *base-lua
+      name:     lua-resty-lrucache
+      apt:
+        git: https://github.com/openresty/lua-resty-lrucache.git
+      status: inactive
+
+    - <<: *base-lua
+      name:     lua-resty-core
+      apt:
+        git: https://github.com/openresty/lua-resty-core.git
+      status: inactive
+      requires:
+        - lua-resty-lrucache
+
+  library:
+    - <<: *base
+      name:     jemalloc
+      apt:
+        git: https://github.com/jemalloc/jemalloc.git
+  #    commit: 50893291621658f355bc5b4d450a8d06a563053d
+      scope:    global
+      setup:
+        before-script:
+          - CFLAGS: >-
+              -g3 -O3
+              -fno-lto
+              -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free
+              -fno-builtin-memalign -fno-builtin-posix_memalign -fno-builtin-valloc -fno-builtin-pvalloc
+              -Werror=declaration-after-statement -Wsign-compare
+        script:
+          - ./autogen.sh
+          - make build_lib
+          #- make install
+          - make install_include install_lib_static install_lib_pc
+          - make tests check
+
+    - <<: *base
+      name:     zlib
+      apt:
+        git: https://github.com/Dead2/zlib-ng.git
+        #git: https://github.com/cloudflare/zlib.git
+        #url: http://www.zlib.net/zlib-1.2.11.tar.gz
+      branch: develop
+      status: active
+      scope:    global
+      setup:
+        before-script:
+          - CFLAGS: -O3
+        script:
+          - ./configure --64 --zlib-compat
+          - make install
+          - make test
+
+    - <<: *base
+      name:     atomic_ops
+      apt:
+        git: https://github.com/ivmai/libatomic_ops.git
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --disable-dependency-tracking
+          - make install-strip
+          #- ./configure --enable-static --disable-shared --disable-dependency-tracking
+
+    - <<: *base
+      name:     luajit
+      apt:
+        git: http://luajit.org/git/luajit-2.0.git
+      status: inactive
+      #branch:   v2.1
+      branch:   master
+      setup:
+        before-script:
+          # [keep out] warning: call to ‘__fread_chk_warn’ declared with attribute warning: fread called with bigger size * nmemb than length of destination buffer
+          - CFLAGS: -std=gnu99 -DLUAJIT_ENABLE_LUA52COMPAT -DLUAJIT_NUMMODE=2
+          #- CFLAGS: -std=gnu99 -DLUAJIT_NUMMODE=2
+          - sed -i 's|\(export PREFIX=.*\)|# \1|' Makefile
+          - sed -i 's|\(INSTALL_INC=\).*|\1${VM_INCLUDE_PATH}/luajit|' Makefile
+        script:
+          - make
+          - make install
+        after-script:
+          - cd ${VM_PREFIX}/bin && ln -sf luajit-2.1.0-beta2 luajit
+      export:
+        - LUA_VERSION: $(grep ABIVER= Makefile | sed 's,ABIVER=,,' | xargs echo -n)
+        - LUAJIT_LIB: ${VM_LIBRARY_PATH}
+        - LUAJIT_INC: ${VM_INCLUDE_PATH}/luajit
+
+    - <<: *base
+      name:     openssl
+      apt:
+        git: https://github.com/openssl/openssl.git
+      branch:   OpenSSL_1_0_2-stable
+      #commit: 550e1d07a69db5af9129533ba7983594b3ed3fec
+      tag: OpenSSL_1_0_2j
+      status: inactive
+      setup:
+      # no-shared #no-zlib-dynamic
+        script:
+          - ./config --test-sanity
+          - ./config --openssldir=${PREFIX} -DSSL_ALLOW_ADH threads enable-ec_nistp_64_gcc_128 enable-camellia enable-md2 enable-idea enable-mdc2 enable-rc5 no-heartbeats no-deprecated no-ssl no-ssl3 no-hw no-err no-unit-test zlib shared
+          - make depend
+          - LD_LIBRARY_PATH=$(pwd) make
+          - LD_LIBRARY_PATH=$(pwd) make rehash
+          - LD_LIBRARY_PATH=$(pwd) make test
+          - make install_sw
+      requires:
+          - zlib
+
+    - <<: *base
+      name: libpcre
+      apt:
+        url: https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz
+      status: inactive
+      setup:
+        before-script:
+          - sudo apt-get -y --force-yes install libreadline-dev
+          - sudo apt-get -y --force-yes install libbz2-dev
+        script:
+          #- ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline
+          - ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-jit
+          - make install-strip
+        #after-script:
+        #  - LDFLAGS: -lpcre -lpthread
+
+  modules:      &mods
+    - <<: *base-mod
+      name:     echo-nginx-module
+      apt:
+        git: https://github.com/openresty/echo-nginx-module.git
+      status: inactive
+      dynamic: True

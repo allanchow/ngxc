@@ -1,0 +1,62 @@
+%YAML 1.2
+---
+# defaults:
+#   - &base-pre-post-build
+#     before-script:
+#    after-script:
+#     patches:
+#   - &base
+#     name:
+#     status: active
+#     apt:
+#     branch: HEAD
+#     tag:
+#     commit:
+#     requires:
+#     scope: local
+#     setup:
+#       threads-enabled: True
+#       script:
+#       <<: *base-pre-post-build
+#   - &base-mod
+#     dynamic: yes
+#     status: active
+#     setup:
+#       <<: *base-pre-post-build
+#     <<: *base
+
+defaults:
+  - &base-pre-post-build
+    before-script:
+   after-script:
+    patches:
+  - &base
+    name:
+    status: active
+    apt:
+    branch: HEAD
+
+inventory:
+  library:
+    - name:     zlib
+      <<: *base
+
+
+
+environment:
+  buildroot:      /build/BUILDROOT
+  source:
+    prefix:       /build/SOURCES
+    lib-path:     /build/SOURCES/library
+    module-path:  /build/SOURCES/modules
+    patch-path:   /build/SOURCES/patches
+  vm:
+    prefix:       /build/BUILDROOT/vm
+    include:      &vm_inc /build/BUILDROOT/vm/include
+    lib-path:     &vm_lib /build/BUILDROOT/vm/lib
+  cpu:
+    sse4_2: True
+    pclmul: True
+
+
+...

@@ -1,0 +1,876 @@
+inventory:
+  library-lua:
+
+    - <<: *base-lua
+      name: luafilesystem
+      apt:
+        git: https://github.com/keplerproject/luafilesystem.git
+      branch: 2.0
+      status: active
+      setup:
+        patches:
+          - luafilesystem.fix.luajit.patch: -p0 -B .luajit
+        before-script:
+          - CFLAGS: -I${VM_LUA_INCLUDE_PATH}
+          - CPPFLAGS: -I${VM_LUA_INCLUDE_PATH}
+          - sed -i 's|\(^PREFIX=\)|#\1|' config
+          - sed -i 's|\(/lib/lua\)/5.1|\1|' config
+        script:
+          - make
+          - make install
+
+    - <<: *base-lua
+      name:     lua-resty-core
+      apt:
+        git: https://github.com/openresty/lua-resty-core.git
+      status: active
+      setup:
+        script:
+          - make install
+      requires:
+        - lua-resty-lrucache
+
+    - <<: *base-lua
+      name:     lua-resty-lrucache
+      apt:
+        git: https://github.com/openresty/lua-resty-lrucache.git
+      status: active
+      setup:
+        script:
+          - make install
+
+    - <<: *base-lua
+      name:     lua-resty-dns
+      apt:
+        git: https://github.com/openresty/lua-resty-dns.git
+      status: active
+      setup:
+        script:
+          - make install
+
+    - <<: *base-lua
+      name:     lua-resty-dns-client
+      apt:
+        git: https://github.com/Mashape/lua-resty-dns-client.git
+      status: active
+      setup:
+        script:
+          - cp -pva src/resty ${VM_LUA_CMODULE_PATH}/
+      requires:
+        - lua-resty-lrucache
+        - lua-resty-dns
+        - penlight
+
+    - <<: *base-lua
+      name:     lua-resty-session
+      apt:
+        git: https://github.com/bungle/lua-resty-session.git
+      setup:
+        script:
+          - make install
+
+    - <<: *base-lua
+      name:     lua-resty-jwt
+      apt:
+        git: https://github.com/SkyLothar/lua-resty-jwt.git
+      setup:
+        script:
+          - cp -pva lib/resty/*.lua ${VM_LUA_CMODULE_PATH}/resty/
+      requires:
+        - lua-resty-hmac
+
+    - <<: *base-lua
+      name:     lua-resty-hmac
+      apt:
+        git: https://github.com/jkeys089/lua-resty-hmac.git
+      setup:
+        script:
+          - make install
+
+    - <<: *base-lua
+      name:     lua-resty-logger-socket0
+      apt:
+        git: https://github.com/cloudflare/lua-resty-logger-socket.git
+      status: active
+      setup:
+        script:
+          - mkdir -p ${VM_LUA_CMODULE_PATH}/resty/logger
+          - cp -pva lib/resty/logger/socket.lua ${VM_LUA_CMODULE_PATH}/resty/logger/socket0.lua
+
+    - <<: *base-lua
+      name:     lua-resty-logger-socket1
+      apt:
+        git: https://github.com/cloudflare/lua-resty-logger-socket.git
+      status: active
+      setup:
+        script:
+          - mkdir -p ${VM_LUA_CMODULE_PATH}/resty/logger
+          - cp -pva lib/resty/logger/socket.lua ${VM_LUA_CMODULE_PATH}/resty/logger/socket1.lua
+
+    - <<: *base-lua
+      name:     lua-resty-logger-socket2
+      apt:
+        git: https://github.com/cloudflare/lua-resty-logger-socket.git
+      status: active
+      setup:
+        script:
+          - mkdir -p ${VM_LUA_CMODULE_PATH}/resty/logger
+          - cp -pva lib/resty/logger/socket.lua ${VM_LUA_CMODULE_PATH}/resty/logger/socket2.lua
+
+    - <<: *base-lua
+      name:     lua-resty-iputils
+      apt:
+        git: https://github.com/hamishforbes/lua-resty-iputils.git
+      status: active
+      setup:
+        script:
+          - make install
+      requires:
+        - lua-resty-lrucache
+
+    - <<: *base-lua
+      name:     lua-cjson
+      apt:
+        git: https://github.com/openresty/lua-cjson.git
+      status: active
+      setup:
+        #patches:
+        #  - lua-cjson.fix.signed.patch: -p0 -B .fix.signed
+        before-script:
+          - sed -i 's|\(^PREFIX =\)|#\1|' Makefile
+          - sed -i 's|\(^LUA_VERSION =\)|#\1|' Makefile
+        script:
+          - make install
+          #- make install-extra
+          #- cd ${VM_LUA_CMODULE_PATH}/cjson/tests && ./genutf8.pl && luajit test.lua
+        # after-script:
+        #   - mkdir lib
+        #   - mv *.o lib/
+
+    - <<: *base-lua
+      name: lua-system-constants
+      apt:
+        git: https://github.com/Mashape/lua-system-constants.git
+      status: active
+      setup:
+        patches:
+          - lua_system_constant.fix.luajit.patch: -p0 -B .luajit
+        before-script:
+          - LUA: luajit
+        script:
+          - make
+          - make install
+
+    - <<: *base-lua
+      name: penlight
+      apt:
+        git: https://github.com/stevedonovan/Penlight.git
+      status: active
+      setup:
+        script:
+          - cp -pvar lua/pl ${VM_LUA_CMODULE_PATH}/
+      requires:
+        - luafilesystem
+    # - <<: *base-lua
+    #   name:     lua-openssl
+    # requires openssl to compat with 0.9.8, and not well support OpenSSL 1.1.0+
+    #   apt:
+    #     git: https://github.com/zhaozg/lua-openssl.git
+    #   status: active
+    #   setup:
+    #     script:
+    #       - LUA_CFLAGS=${CFLAGS} -DCOMPAT53_PREFIX=lua
+    #       - make install
+    #   requires:
+    #     - openssl
+
+  library:
+    - <<: *base
+      name:     jemalloc
+      apt:
+        git: https://github.com/jemalloc/jemalloc.git
+        # commit: 50893291621658f355bc5b4d450a8d06a563053d
+      branch: master
+      status: inactive
+      scope:  global
+      setup:
+        before-script:
+          - CFLAGS: >-
+              -g3 -O3
+              -fno-lto
+              -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free
+              -fno-builtin-memalign -fno-builtin-posix_memalign -fno-builtin-valloc -fno-builtin-pvalloc
+              -Werror=declaration-after-statement -Wsign-compare
+        script:
+          - ./autogen.sh
+          - make build_lib
+          #- make install
+          - make install_include install_lib_static install_lib_pc
+          - make tests check
+
+    - <<: *base
+      name:     zlib
+      apt:
+        git: https://github.com/Dead2/zlib-ng.git
+        #git: https://github.com/cloudflare/zlib.git
+        #url: http://www.zlib.net/zlib-1.2.11.tar.gz
+      branch: develop
+      #commit: 9fdda220c62d5ba8746c2bf6f6c63da27897a90f
+      status: active
+      setup:
+        before-script:
+          - CFLAGS: -O3
+        script:
+          - ./configure --64 --zlib-compat
+          - make install
+          - make test
+
+    - <<: *base
+      name:     atomic_ops
+      apt:
+        git: https://github.com/ivmai/libatomic_ops.git
+      status: active
+      scope: global
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --disable-dependency-tracking
+          - make install-strip
+
+    - <<: *base
+      name:     luajit
+      apt:
+        git: http://luajit.org/git/luajit-2.0.git
+      status: active
+      branch: v2.1
+      #branch:   master
+      setup:
+        before-script:
+          # [keep out] warning: call to ‘__fread_chk_warn’ declared with attribute warning: fread called with bigger size * nmemb than length of destination buffer
+          - CFLAGS: -std=gnu99 -DLUAJIT_ENABLE_LUA52COMPAT -DLUAJIT_NUMMODE=2
+          #- CFLAGS: -std=gnu99 -DLUAJIT_NUMMODE=2
+          - sed -i 's|\(export PREFIX=.*\)|# \1|' Makefile
+          - sed -i 's|\(INSTALL_INC=\).*|\1${VM_LUA_INCLUDE_PATH}|' Makefile
+          - sed -i 's|\(INSTALL_LMOD=\).*|\1${VM_LUA_CMODULE_PATH}|' Makefile
+          - sed -i 's|\(INSTALL_CMOD=\).*|\1${VM_LUA_CMODULE_PATH}|' Makefile
+          #- sed -i 's|\(INSTALL_LJLIBD=\).*|\1${VM_LUA_CMODULE_PATH}|' Makefile
+          - sed -i 's|@echo "  \($(SYMLINK) $(INSTALL_TNAME) $(INSTALL_TSYM)\)"|\1|' Makefile
+        script:
+          - make
+          - make install
+        after-script:
+          - ln -s ${VM_LUA_INCLUDE_PATH} $(pkg-config luajit --cflags-only-I | cut -d' ' -f1 | cut -c 3-)
+      export:
+        - LUA_VERSION: $(grep ABIVER= Makefile | sed 's,ABIVER=,,' | xargs echo -n)
+        - LUAJIT_LIB: ${VM_LUA_CMODULE_PATH}
+        - LUAJIT_INC: ${VM_LUA_INCLUDE_PATH}
+        - LUA_INCLUDE_DIR: ${LUAJIT_INC}
+        - LUA_LIB_DIR: ${LUAJIT_LIB}
+        - LUA_CMODULE_DIR: ${LUAJIT_LIB}
+        - LUA_MODULE_DIR: ${LUAJIT_LIB}
+        - LUA_PATH: \"./?.lua;;${LUAJIT_LIB}/?.lua\"
+        - LUA_CPATH: \"./?.so;;${LUAJIT_LIB}/?.so\"
+
+    - <<: *base
+      name:     libunwind
+      apt:
+        git: http://git.savannah.gnu.org/r/libunwind.git
+
+    - <<: *base
+      name:     libxml2
+      apt:
+        git: https://git.gnome.org/browse/libxml2
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure -with-lzma=${PREFIX} --without-python
+          - make install-strip
+      requires:
+        - xz
+
+    - <<: *base
+      name:     libxslt
+      apt:
+        git: https://git.gnome.org/browse/libxslt
+      setup:
+        script:
+          - ./autogen.sh --without-python --with-crypto --with-libxml-prefix=${PREFIX} --with-libxml-include-prefix=${VM_INCLUDE_PATH} --with-libxml-libs-prefix=${VM_LIBRARY_PATH}
+          - make install-strip
+      requires:
+        - libxml2
+
+    - <<: *base
+      name:     openssl
+      apt:
+        git: https://github.com/openssl/openssl.git
+      #branch:   OpenSSL_1_0_2-stable
+      branch:   OpenSSL_1_1_0-stable
+      #commit: 550e1d07a69db5af9129533ba7983594b3ed3fec
+      tag: OpenSSL_1_1_0f
+      #tag: OpenSSL_1_0_2k
+      status: active
+      setup:
+        before-script:
+          # internal behaviour, enable-sock is required by nginx
+          - SSL_INTERNAL: >-
+              threads zlib enable-multiblock
+              no-dso no-err no-unit-test no-ui enable-sock
+              no-rdrand no-egd
+          # ciphers
+          - SSL_CIPHERS: >-
+              enable-chacha enable-ec_nistp_64_gcc_128 enable-ecdsa enable-poly1305 enable-ct enable-camellia enable-md2 enable-rc5 enable-idea enable-mdc2
+              no-weak-ssl-ciphers
+              no-heartbeats no-deprecated no-ssl no-ssl3 no-ssl3-method
+          # engines
+          - SSL_ENGINES: >-
+              enable-static-engine
+              enable-afalgeng no-capieng
+              enable-async enable-ocsp enable-psk enable-rfc3779
+          # protocol, no-srp trigger a lot of undefined references
+          - SSL_PROTOCOLS: >-
+              enable-srtp enable-ts
+              no-sctp no-nextprotoneg
+          # hardward support
+          - SSL_HW: no-hw no-engine
+          # development only
+          - SSL_DEV: no-fuzz-libfuzzer no-fuzz-afl no-asan no-ubsan
+          #static build only: no-autoerrinit no-autoalginit
+        script:
+          - ./config --test-sanity
+          - >-
+            ./config --prefix=${PREFIX} --openssldir=${PREFIX}
+            -Wl,-L${VM_LIBRARY_PATH} -Wl,-rpath=${VM_LIBRARY_PATH}
+            -I${VM_INCLUDE_PATH}
+            --api=0.9.8 shared enable-pic
+            ${SSL_INTERNAL}
+            ${SSL_CIPHERS}
+            ${SSL_ENGINES}
+            ${SSL_PROTOCOLS}
+            ${SSL_HW}
+            ${SSL_DEV}
+
+
+            # CFLAGS='-fPIC -I/build/BUILDROOT/vm/include -Wall -pipe -g3 -O3 -funroll-loops -fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=. -Wformat -Werror=format-security -Wdate-time -Wno-unused-parameter -Wsign-compare -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -grecord-gcc-switches -m64 -m128bit-long-double -minline-stringops-dynamically -march=core2 -mcx16 -mmmx -msse -msse2 -mfpmath=sse  -mno-sse4.2 -mno-sse4 -mno-sse4.1 -mno-sse3 -mno-pclmul -mno-sse2avx -mno-sse4a -mno-avx2 -mno-aes -L/build/BUILDROOT/vm/lib' LDFLAGS='-L/build/BUILDROOT/vm/lib -Wl,--enable-new-dtags,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bsymbolic-functions -Wl,-z,relro,-z,now -lz' ./config --prefix=/build/BUILDROOT/vm --openssldir=/build/BUILDROOT/vm --api=1.0.0 threads shared zlib-dynamic enable-chacha enable-ec_nistp_64_gcc_128 enable-ecdsa enable-poly1305 enable-ct enable-camellia enable-md2 enable-rc5 enable-idea enable-mdc2 enable-afalgeng enable-async enable-ts enable-ocsp enable-psk enable-rfc3779 no-sock enable-srtp  enable-static-engine no-ui no-rdrand no-egd no-weak-ssl-ciphers no-heartbeats no-deprecated no-ssl no-ssl3 no-ssl3-method no-srp no-nextprotoneg no-capieng no-hw no-engine no-dso no-err no-unit-test enable-static-engine enable-pic no-fuzz-libfuzzer no-fuzz-afl no-asan no-ubsan enable-multiblock no-sctp
+
+          #
+          #  no-fuzz-libfuzzer no-fuzz-afl no-asan no-ubsan no-multiblock no-sctp no-dynamic-engine
+          # enable-fuzz-libfuzzer, enable-fuzz-afl
+          #          Build with support for fuzzing using either libfuzzer or AFL.
+          #          These are developer options only. They may not work on all
+          #          platforms and should never be used in production environments.
+          # enable-asan
+          #         Build with the Address sanitiser. This is a developer option
+          #         only. It may not work on all platforms and should never be
+          #         used in production environments. It will only work when used
+          #         with gcc or clang and should be used in conjunction with the
+          #         no-shared option.
+          # enable-ubsan
+          #          Build with the Undefined Behaviour sanitiser. This is a
+          #          developer option only. It may not work on all platforms and
+          #          should never be used in production environments. It will only
+          #          work when used with gcc or clang and should be used in
+          #          conjunction with the "-DPEDANTIC" option (or the
+          #          --strict-warnings option).
+          #- ./config --openssldir=${PREFIX} -DSSL_ALLOW_ADH threads enable-ec_nistp_64_gcc_128 enable-camellia enable-md2 enable-idea enable-mdc2 enable-rc5 no-heartbeats no-deprecated no-ssl no-ssl3 no-hw no-err no-unit-test zlib shared
+          #- make depend
+          - LD_LIBRARY_PATH=$(pwd) make
+          #- LD_LIBRARY_PATH=$(pwd) make rehash
+          - LD_LIBRARY_PATH=$(pwd) make test
+          - make install_sw
+      requires:
+          - zlib
+
+    - <<: *base
+      name: libpcre
+      apt:
+        url: https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz
+      status: active
+      setup:
+        before-script:
+          - sudo apt-get -y --force-yes install libreadline-dev
+          - sudo apt-get -y --force-yes install libbz2-dev
+        script:
+          #- ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline
+          - ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-jit
+          - make install-strip
+        #after-script:
+        #  - LDFLAGS: -lpcre -lpthread
+
+    - <<: *base
+      name:     lzo
+      apt:
+        url: http://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz
+      scope: global
+      status: active
+      setup:
+        script:
+          - ./configure --disable-dependency-tracking
+          - make install-strip
+
+    - <<: *base
+      name:     xz
+      apt:
+        git: http://git.tukaani.org/xz.git
+      scope: global
+      status: active
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --disable-rpath
+          - make install-strip
+
+    - <<: *base
+      name:     nasm
+      apt:
+        git: http://repo.or.cz/nasm.git
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure
+          - make perlreq all manpages install
+          - make golden test
+      export:
+        - NASM: $(pwd)/.nasm/bin/nasm
+      branch:   master
+      tag:      nasm-2.12.02
+
+    - <<: *base
+      name:     jbigkit
+      apt:
+        git: https://www.cl.cam.ac.uk/~mgk25/git/jbigkit
+      setup:
+        script:
+          #- sed -i 's|CFLAGS = |CFLAGS = -fPIC -I../libjbig |' Makefile
+          #- sed -i "s|-ljbig85|../libjbig/libjbig85.a|" pbmtools/Makefile
+          #- sed -i "s|-ljbig|../libjbig/libjbig.a|" pbmtools/Makefile
+          - make lib
+          - make test
+
+    - <<: *base
+      name:     libtiff
+      apt:
+        url: http://download.osgeo.org/libtiff/tiff-4.0.7.tar.gz
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-zlib --enable-jpeg --enable-old-jpeg --disable-jpeg12 --enable-jbig --enable-lzma --enable-lzw --enable-largefile --enable-ccitt --enable-packbits --enable-thunder --enable-next --enable-logluv --disable-mdi --disable-win32-io
+          - make install-strip
+      requires:
+        - zlib
+        - libjpeg-turbo
+        - jbigkit
+        - xz
+
+    - <<: *base
+      name:     libpng
+      apt:
+        git: http://git.code.sf.net/p/libpng/code
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure
+          - make install-strip
+
+    - <<: *base
+      name:     libjpeg-turbo
+      apt:
+        git: https://github.com/libjpeg-turbo/libjpeg-turbo.git
+      setup:
+        script:
+          - ${LIBTOOLIZE:-libtoolize} -c -f || glibtoolize -c -f
+          - ${ACLOCAL:-aclocal} -I m4
+          - ${AUTOCONF:-autoconf}
+          - ${AUTOHEADER:-autoheader}
+          - ${AUTOMAKE:-automake} -acf --foreign
+          - ./configure
+          # --with-12bit
+          # Restored 12-bit-per-component JPEG support. A 12-bit version of libjpeg-turbo can now be built by passing an argument of --with-12bit to configure (Unix) or -DWITH_12BIT=1 to cmake (Windows.) 12-bit JPEG support is included only for convenience. Enabling this feature disables all of the performance features in libjpeg-turbo, as well as arithmetic coding and the TurboJPEG API. The resulting library still contains the other libjpeg-turbo features (such as the colorspace extensions), but in general, it performs no faster than libjpeg v6b.
+          - make install-strip
+      requires:
+        - nasm
+
+    - <<: *base
+      name:     giflib
+      apt:
+        git: http://git.code.sf.net/p/giflib/code
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure
+          - make install-strip
+
+    - <<: *base
+      name:     libwebp
+      apt:
+        git: https://chromium.googlesource.com/webm/libwebp
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-png --enable-jpeg --enable-jbig --enable-tiff --enable-gif --enable-libwebpmux --enable-libwebpdemux --enable-libwebpdecoder  --enable-libwebpextras --disable-wic --disable-gl
+          - make install-strip
+      requires:
+        - libpng
+        - jbigkit
+        - libjpeg-turbo
+        - libtiff
+        - giflib
+
+    - <<: *base
+      name:     libxpm
+      apt:
+        git: https://anongit.freedesktop.org/git/xorg/lib/libXpm.git
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure
+          - make install-strip
+
+    - <<: *base
+      name:     libgd
+      apt:
+        git: https://github.com/libgd/libgd.git
+      setup:
+        script:
+          - ./bootstrap.sh
+          - ./configure --disable-werror
+          #--with-freetype
+          #--with-fontconfig
+          - make install-strip
+      requires:
+        - zlib
+        - libpng
+        - libjpeg-turbo
+        - libtiff
+        - libwebp
+        - libxpm
+
+    - <<: *base
+      name:     geoip
+      apt:
+        git: https://github.com/maxmind/geoip-api-c.git
+      setup:
+        script:
+          - ./bootstrap
+          - ./configure --disable-data-files --disable-dependency-tracking
+          - make install-strip
+
+    - <<: *base
+      name:     libtap
+      apt:
+        git: https://github.com/zorgnax/libtap.git
+      setup:
+        script:
+          - mkdir -p ${PREFIX}/libtap
+          - cp -prva * ${PREFIX}/libtap
+
+    - <<: *base
+      name:     libmaxminddb
+      apt:
+        git: https://github.com/maxmind/libmaxminddb.git
+      setup:
+        before-script:
+          - mkdir -p t/libtap/
+          - cp -prva ${PREFIX}/libtap t/
+          - sed -i 's|\(#include "tap.h"\)|\1\n#define __USE_MISC\n#include <sys/mman.h>\n|' t/libtap/tap.c
+        script:
+          - ./bootstrap
+          - ./configure
+          - make install-strip
+      requires:
+        - libtap
+
+    - <<: *base
+      name:     apr
+      apt:
+        git: https://github.com/apache/apr
+      setup:
+        script:
+          - ./configure
+          - make
+          - make test
+          - make install
+
+    - <<: *base
+      name:     modsecurity-nginx-refactoring
+      apt:
+        git: https://github.com/SpiderLabs/ModSecurity.git
+      branch:   nginx_refactoring
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-standalone-module --disable-mlogc --enable-lua-cache --enable-pcre-jit --enable-pcre-study --enable-pcre-match-limit=no --enable-pcre-match-limit-recursion=no
+        #after-script:
+        #   - DEFAULT_USER: *ngx_user
+        #   - DEFAUTT_GROUP: *ngx_group
+      requires:
+        - libpcre
+        - zlib
+        - xz
+        - libxml2
+        - apr
+        - ssdeep
+
+    - <<: *base
+      name:     ssdeep
+      apt:
+        git: https://github.com/a4lg/ssdeep.git
+      setup:
+        script:
+          - autoreconf --install
+          - ./configure
+          - make install-strip
+
+    - <<: *base
+      name:     owasp-modsecurity-crs
+      apt:
+        git: https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+
+    - <<: *base
+      name:     sregex
+      apt:
+        git: https://github.com/openresty/sregex.git
+
+      # setup:
+      #   script:
+      #    after-script:
+      #       - SREGEX_INC: ${VM_INCLUDE_PATH}
+      #       - SREGEX_LIB: ${VM_LIBRARY_PATH}
+
+  modules:      &mods
+    - <<: *base-mod
+      name:     echo-nginx-module
+      apt:
+        git: https://github.com/openresty/echo-nginx-module.git
+      # setup:
+      #   patches:
+      #     - echo-nginx.fix.1.11.11.patch: -p0 -B .fix.1.11.11
+      status: active
+      dynamic: True
+
+    - <<: *base-mod
+      name:     headers-more-nginx-module
+      apt:
+        git: https://github.com/openresty/headers-more-nginx-module.git
+      status: active
+      dynamic: True
+
+    - <<: *base-mod
+      name:     nginx-rtmp-module
+      apt:
+        git: https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+      branch:   dev
+
+    - <<: *base-mod
+      name:     set-misc-nginx-module
+      apt:
+        git: https://github.com/openresty/set-misc-nginx-module.git
+      status: active
+      dynamic: True
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     redis2-nginx-module
+      apt:
+        git: https://github.com/openresty/redis2-nginx-module.git
+
+    - <<: *base-mod
+      name:     ngx-http-geoip2-module
+      apt:
+        git: https://github.com/leev/ngx_http_geoip2_module.git
+      requires:
+        - libmaxminddb
+
+    - <<: *base-mod
+      name:     nginx-vts-module
+      apt:
+        git: https://github.com/vozlt/nginx-module-vts.git
+
+    - <<: *base-mod
+      name:     ngx-brotli-module
+      apt:
+        git: https://github.com/google/ngx_brotli.git
+        git_submodule: True
+      status: active
+      dynamic: True
+
+    - <<: *base-mod
+      name:     memc-nginx-module
+      apt:
+        git: https://github.com/openresty/memc-nginx-module.git
+      status: active
+      dynamic: True
+
+    - <<: *base-mod
+      name:     ngx-http-trim-filter-module
+      apt:
+        git: https://github.com/taoyuanyuan/ngx_http_trim_filter_module.git
+
+    - <<: *base-mod
+      name:     ngx-aws-auth-module
+      apt:
+        git: https://github.com/anomalizer/ngx_aws_auth.git
+      requires:
+        - openssl
+        - libpcre
+        - zlib
+
+    - <<: *base-mod
+      name:     nginx-eval-module
+      apt:
+        git: https://github.com/openresty/nginx-eval-module.git
+
+    - <<: *base-mod
+      name:     nginx-sorted-querystring-module
+      apt:
+        git: https://github.com/wandenberg/nginx-sorted-querystring-module.git
+
+    - <<: *base-mod
+      name:     ngx-http-substitutions-filter-module
+      apt:
+        git: https://github.com/yaoweibin/ngx_http_substitutions_filter_module.gi
+
+    - <<: *base-mod
+      name:     nginx-http-concat-module
+      apt:
+        git: https://github.com/alibaba/nginx-http-concat.git
+
+    - <<: *base-mod
+      name:     nginx-http-rdns-module
+      apt:
+        git: https://github.com/uiltondutra/nginx-http-rdns.git
+
+    - <<: *base-mod
+      name:     nginx-http-auth-digest-module
+      apt:
+        git: https://github.com/atomx/nginx-http-auth-digest.git
+
+    - <<: *base-mod
+      name:     nginx-upstream-fair-module
+      apt:
+        git: https://github.com/hnlq715/nginx-upstream-fair.git
+
+    - <<: *base-mod
+      name:     array-var-nginx-module
+      apt:
+        git: https://github.com/openresty/array-var-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     form-input-nginx-module
+      apt:
+        git: https://github.com/calio/form-input-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     encrypted-session-nginx-module
+      apt:
+        git: https://github.com/openresty/encrypted-session-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     nginx-sticky-ng-module
+      apt:
+        git: https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng.git
+
+    - <<: *base-mod
+      name:     naxsi
+      apt:
+        git: https://github.com/nbs-system/naxsi.git
+
+    - <<: *base-mod
+      name:     srcache-nginx-module
+      apt:
+        git: https://github.com/openresty/srcache-nginx-module.git
+      status: active
+      dynamic: True
+
+    - <<: *base-mod
+      name:     ngx-devel-kit-module
+      apt:
+        git: https://github.com/simpl/ngx_devel_kit.git
+      status: active
+
+    - <<: *base-mod
+      name:     lua-nginx-module
+      apt:
+        git: https://github.com/openresty/lua-nginx-module.git
+      status: active
+      setup:
+        #patches:
+        #  - lua-nginx.openssl.1.1.x.fix.01.12a56fe.patch: -p0
+        #  - lua-nginx.openssl.1.1.x.fix.02.2311024.patch: -p0
+        #  - lua-nginx.openssl.1.1.x.fix.03.d14f90e.patch: -p0
+        #  - lua-nginx.openssl.1.1.x.fix.04.d093951.patch: -p0
+        #  - lua-nginx.fix.lua-2.1.patch: -p0 -B .fix.lua-2.1
+        #  - lua-nginx.fix.1.11.11.patch: -p0 -B .fix.1.11.11
+        before-script:
+          # in openssl-1.1 brach
+          - git cherry-pick 31aee768d856f7dfabe069d220c003fad0c67fa1
+          - git cherry-pick 12a56fef7db3d9df6a0df6ab91a9e7c38bace4ea
+          - git cherry-pick 2311024b02033cdb9e16e3ffe6870f43bde17301
+          - git cherry-pick d14f90ed98c3c5152f4bbb52e29fd089379e21a2
+          - git cherry-pick d0939519511d77c73b99753ee2c77369d349cc9e
+      requires:
+        - luajit
+        - ngx-devel-kit-module
+        - openssl
+
+    - <<: *base-mod
+      name:     ngx-cache-purge-module
+      apt:
+        git: https://github.com/FRiCKLE/ngx_cache_purge.git
+
+    - <<: *base-mod
+      name:     ngx-http-dyups-module
+      apt:
+        git: https://github.com/yzprofile/ngx_http_dyups_module.git
+      status: active
+      dynamic: True
+      requires:
+        - lua-nginx-module
+
+    - <<: *base-mod
+      name:     nginx-upstream-check-module
+      apt:
+        git: https://github.com/2Fast2BCn/nginx_upstream_check_module.git
+
+    - <<: *base-mod
+      name:     replace-filter-nginx-module
+      apt:
+        git: https://github.com/openresty/replace-filter-nginx-module.git
+      requires:
+        - sregex
+
+    - <<: *base-mod
+      name:     nginx-ct
+      apt:
+        git: https://github.com/grahamedgecombe/nginx-ct.git
+      status: active
+      dynamic:  True
+      requires:
+        - openssl
+
+    - <<: *base-mod
+      name: ngx-http-enhanced-memcached-module
+      apt:
+        git: https://github.com/bpaquet/ngx_http_enhanced_memcached_module.git
+
+    - <<: *base-mod
+      name: ngx-upstream-jdomain-module
+      apt:
+        git: https://github.com/viciious/ngx_upstream_jdomain.git
+      status: active
+
+    - <<: *base-mod
+      name: ngx-vod-module-module
+      apt:
+        git: https://github.com/kaltura/nginx-vod-module.git
+
+    - <<: *base-mod
+      name: nginx-auth-ldap
+      apt:
+        git: https://github.com/jcollie/nginx-auth-ldap.git

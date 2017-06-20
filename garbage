@@ -1,0 +1,89 @@
+#
+    # def _run(self, env:Union[Dict[str,str],MergedMap]=None, cwd='.') -> None:
+    #     shutil.copytree('%s/%s' % (Environment.source.lib_path, self.name), self.buildpath)
+    #     super()._run(env)
+
+    # i = Inventory.items['zlib']
+    # i.update()
+    # print(i)
+    # i._run()
+    # for k, v in Inventory.items.items():
+    # print('%s' % k + ' '*40 + '%s' % v.requires )
+    # for i in Inventory.items['libtiff'].requires:
+    #    print(i)
+    #self._libraries['pcre']._run()
+    # self._libraries['zlib']._run()
+    # sys.exit()
+    #self._libraries['openssl']._rundry_run=self.__dry_run()
+    # a = list(self._libraries['openssl'].requires)[0]
+    # b = self._libraries['zlib']
+    # print(a)
+    # print(b)
+    # print(a==b)
+    # print(type(a))
+    # print(type(b))
+    # Inventory.modules['ngx-aws-auth-module']._run()
+    # sys.exit()
+    # for l in self._libraries.values():
+    #     # print(l.name)
+    #     Inventory.libraries[l.name]._rundry_run=self.__dry_run()
+    #     # print(Inventory.libraries[l.name].is_compiled)
+    #Inventory.libraries['openssl']._rundry_run=self.__dry_run()
+    #sys.exit()
+
+    #ld_opts = [['-ljemalloc'], ['-lz'], ['-latomic_ops'], ['-lpcre', '-pthread'], ['-lssl', '-ldl', '-lz', '-lcrypto', '-ldl', '-lz']]
+
+
+
+            -with-ld-opt=' -Wl,-rpath=/build/BUILDROOT/vm/lib -Wl,-Bstatic -L/build/BUILDROOT/vm/lib -lssl -lcrypto -lz -Wl,-Bdynamic -ldl' --grou
+            print('----##---LD---##')
+            print(list(ld_opts))
+
+            # print('----##---LD---##')
+            # print(list(extra_mod))
+            #Inventory.libraries['zlib']._rundry_run=self.__dry_run()
+            #self._libraries['openssl']._rundry_run=self.__dry_run()
+            # sys.exit()
+            #self._libraries['pcre']._rundry_run=self.__dry_run()
+            # print(self.libraries['libatomic_ops']._pre_run()
+            # print(type(self.libraries['libatomic_ops']))
+            # sys.exit()
+            #self.libraries
+        #glo_req_libs = [v for k, v in Inventory.items.items() if v.scope == Scope.GLOBAL and v.status == State.ACTIVE]
+            # print(glo_req_libs)
+            # for l in glo_req_libs: l._run()
+            # sys.exit()
+            # auto add -l<lib name> in LDFLAGS
+        #glo_libs = [item for k, item in Inventory.items.items() if item.scope == Scope.GLOBAL]
+        #req_libs = [item for k, item in Inventory.items.items() if item not in glo_req_libs]
+            # auto add -l<lib name> in LDFLAGS
+        # @property
+        # def setup(self) -> Setup: return self.__setup
+        # def _run(self, env:Union[Dict[str,str],MergedMap]=None) -> None:
+
+
+
+                #env = self.__get_mod_active_all_pre_env()
+        #p = [m._pre_environment for m in self.__helper.ok_mod_active]
+                #p = [m._pre_environment for m in self.__helper.ok_mod_active if m.name=='pcre-jit']
+                #if 'PREFIX' in me: me.pop('PREFIX')
+                #env['PREFIX'] = self.__options.prefix
+                #env.merge({'CFLAGS':'%s -fvisibility=hiddden' % self.__fix_tfo})
+                #me.pop('LDFLAGS')
+                #print(me)
+                #sys.exit()
+                # Merge user env
+                #env = {'PREFIX': self.__options.prefix, 'CFLAGS': '%s %s' % (self.__fix_tfo, p)}
+                # self.__debug = True
+                # self._run(env=env)
+                #self.__debug = False
+
+                def __get_mod_active_all_pre_env(self) -> MergedMap:
+                      env = MergedMap()
+                      #print('----')
+                      #print(self.__helper.ok_mod_active)
+                      for _, m in self.__helper.ngx_mod_active.items():
+                      #    print(m._pre_environment)
+                          env.merge(m._pre_environment, merge=MergeMapType.AsString)
+                      #sys.exit()
+                      return env

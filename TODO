@@ -1,0 +1,3 @@
+- support minimum version in inventory
+- os.environ() too over-whemling
+- can't get -l<xxx>

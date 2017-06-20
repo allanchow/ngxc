@@ -1,0 +1,703 @@
+%YAML 1.2
+---
+defaults:
+  - &base-pre-post-build
+    before-script:
+   after-script:
+    patches:
+  - &base
+    name:
+    status: active
+    apt:
+    branch: HEAD
+    tag:
+    commit:
+    requires:
+    scope: local
+    setup:
+      threads-enabled: True
+      script:
+      <<: *base-pre-post-build
+  - &base-mod
+    dynamic: yes
+    status: active
+    setup:
+      <<: *base-pre-post-build
+    <<: *base
+
+
+# ███████ ███    ██ ██    ██ ██ ██████   ██████  ███    ██ ███    ███ ███████ ███    ██ ████████
+# ██      ████   ██ ██    ██ ██ ██   ██ ██    ██ ████   ██ ████  ████ ██      ████   ██    ██
+# █████   ██ ██  ██ ██    ██ ██ ██████  ██    ██ ██ ██  ██ ██ ████ ██ █████   ██ ██  ██    ██
+# ██      ██  ██ ██  ██  ██  ██ ██   ██ ██    ██ ██  ██ ██ ██  ██  ██ ██      ██  ██ ██    ██
+# ███████ ██   ████   ████   ██ ██   ██  ██████  ██   ████ ██      ██ ███████ ██   ████    ██
+
+environment:
+  buildroot:      /build/BUILDROOT
+  source:
+    prefix:       /build/SOURCES
+    lib-path:     /build/SOURCES/library
+    module-path:  /build/SOURCES/modules
+    patch-path:   /build/SOURCES/patches
+  vm:
+    prefix:       /build/BUILDROOT/vm
+    include:      &vm_inc /build/BUILDROOT/vm/include
+    lib-path:     &vm_lib /build/BUILDROOT/vm/lib
+  cpu:
+    sse4_2: True
+    pclmul: True
+
+
+# ██ ███    ██ ██    ██ ███████ ███    ██ ████████  ██████  ██████  ██    ██
+# ██ ████   ██ ██    ██ ██      ████   ██    ██    ██    ██ ██   ██  ██  ██
+# ██ ██ ██  ██ ██    ██ █████   ██ ██  ██    ██    ██    ██ ██████    ████
+# ██ ██  ██ ██  ██  ██  ██      ██  ██ ██    ██    ██    ██ ██   ██    ██
+# ██ ██   ████   ████   ███████ ██   ████    ██     ██████  ██   ██    ██
+
+inventory:
+  library:
+    - <<: *base
+      name:     jemalloc
+      apt:
+        git: https://github.com/jemalloc/jemalloc.git
+      branch:   master
+      status:   active
+  #    commit: 50893291621658f355bc5b4d450a8d06a563053d
+      scope:    global
+      setup:
+        threads-enabled: False
+        before-script:
+          - CFLAGS: >-
+              -fno-lto
+              -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free
+              -fno-builtin-memalign -fno-builtin-posix_memalign -fno-builtin-valloc -fno-builtin-pvalloc
+        script:
+          - ./autogen.sh
+          - make build_lib
+          - make install_include install_lib_static install_lib_pc
+          - make tests check
+       after-script:
+          - LDFLAGS: -ljemalloc -lpthread
+
+    - <<: *base
+      name:     zlib
+      apt:
+        git: https://github.com/cloudflare/zlib.git
+      status:   active
+  #    commit: 50893291621658f355bc5b4d450a8d06a563053d
+      requires:
+      #scope:    global
+      setup:
+        before-script:
+          - CFLAGS: -O3
+        script:
+          - ./configure --64 #--static
+          - make install
+
+    - <<: *base
+      name:     atomic_ops
+      apt:
+        git: https://github.com/ivmai/libatomic_ops.git
+      status:   active
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --disable-dependency-tracking
+          - make install-strip
+          #- ./configure --enable-static --disable-shared --disable-dependency-tracking
+
+    - <<: *base
+      name:     luajit
+      apt:
+        git: http://luajit.org/git/luajit-2.0.git
+      branch:   v2.1
+      status:   active
+      setup:
+        before-script:
+          # [keep out] warning: call to ‘__fread_chk_warn’ declared with attribute warning: fread called with bigger size * nmemb than length of destination buffer
+          - CFLAGS: -O0
+          - sed -i'' 's|\(export PREFIX=.*\)|# \1|' Makefile
+        script:
+          - make
+          - make install
+       after-script:
+          - LUAJIT_LIB: *vm_lib
+          - LUAJIT_INC: *vm_inc
+          - cd ${BINDIR} && ln -sf luajit-2.1.0-beta2 luajit
+
+    - <<: *base
+      name:     libunwind
+      apt:
+        git: http://git.savannah.gnu.org/r/libunwind.git
+
+    - <<: *base
+      name:     libxml2
+      apt:
+        git: https://git.gnome.org/browse/libxml2
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure -with-lzma=${PREFIX} --without-python --enable-static --disable-shared
+          - make install-strip
+      requires:
+        - xza
+
+    - <<: *base
+      name:     libxslt
+      apt:
+        git: https://git.gnome.org/browse/libxslt
+      setup:
+        script:
+          - ./autogen.sh --without-python --with-crypto --with-libxml-prefix=${PREFIX} --with-libxml-include-prefix=${VM_INCLUDE_PATH} --with-libxml-libs-prefix=${VM_LIBRARY_PATH} --enable-static --disable-shared
+          - make install-strip
+      requires:
+        - libxml2
+
+    - <<: *base
+      name:     openssl
+      apt:
+        git: https://github.com/openssl/openssl.git
+      branch:   OpenSSL_1_0_2-stable
+      tag: OpenSSL_1_0_2k
+      setup:
+        script:
+          - ./config --test-sanity
+          - ./config threads enable-ec_nistp_64_gcc_128 enable-camellia enable-md2 enable-idea enable-mdc2 enable-rc5 no-heartbeats no-deprecated no-ssl no-ssl3 no-hw no-err no-unit-test zlib shared --openssldir=${PREFIX} # no-shared #no-zlib-dynamic
+          - make depend
+          - make
+          - make test
+          - make install_sw
+      requires:
+          - zlib
+
+    - <<: *base
+      name: pcre
+      apt:
+        url: https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz
+      status: active
+      setup:
+        before-script:
+          - apt-get -y install libreadline-dev
+          - apt-get -y install libbz2-dev
+        script:
+          - ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline --enable-jit
+          - make install-strip
+
+    - <<: *base
+      name:     xz
+      apt:
+        git: http://git.tukaani.org/xz.git
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure install-strip
+
+    - <<: *base
+      name:     nasm
+      apt:
+        git: http://repo.or.cz/nasm.git
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure
+          - make perlreq all manpages install
+          - make golden test
+       after-script:
+          - NASM: $(pwd)/.nasm/bin/nasm
+      branch:   master
+      tag:      nasm-2.12.02
+
+    - <<: *base
+      name:     jbigkit
+      apt:
+        git: https://www.cl.cam.ac.uk/~mgk25/git/jbigkit
+      setup:
+        script:
+          #- sed -i' ' 's|CFLAGS = |CFLAGS = -fPIC -I../libjbig |' Makefile
+          #- sed -i' ' "s|-ljbig85|../libjbig/libjbig85.a|" pbmtools/Makefile
+          #- sed -i' ' "s|-ljbig|../libjbig/libjbig.a|" pbmtools/Makefile
+          - make lib
+          - make test
+
+    - <<: *base
+      name:     libtiff
+      apt:
+        url: http://download.osgeo.org/libtiff/tiff-4.0.7.tar.gz
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-static --disable-shared --enable-zlib --enable-jpeg --enable-old-jpeg --disable-jpeg12 --enable-jbig --enable-lzma --enable-lzw --enable-largefile --enable-ccitt --enable-packbits --enable-thunder --enable-next --enable-logluv --disable-mdi --disable-win32-io
+          - make install-strip
+      requires:
+        - zlib
+        - libjpeg-turbo
+        - jbigkit
+        - xz
+
+    - <<: *base
+      name:     libpng
+      apt:
+        git: http://git.code.sf.net/p/libpng/code
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-static --disable-shared
+          - make install-strip
+
+    - <<: *base
+      name:     libjpeg-turbo
+      apt:
+        git: https://github.com/libjpeg-turbo/libjpeg-turbo.git
+      setup:
+        script:
+          - ${LIBTOOLIZE:-libtoolize} -c -f || glibtoolize -c -f
+          - ${ACLOCAL:-aclocal} -I m4
+          - ${AUTOCONF:-autoconf}
+          - ${AUTOHEADER:-autoheader}
+          - ${AUTOMAKE:-automake} -acf --foreign
+          - ./configure --enable-static --disable-shared
+          # --with-12bit
+          # Restored 12-bit-per-component JPEG support. A 12-bit version of libjpeg-turbo can now be built by passing an argument of --with-12bit to configure (Unix) or -DWITH_12BIT=1 to cmake (Windows.) 12-bit JPEG support is included only for convenience. Enabling this feature disables all of the performance features in libjpeg-turbo, as well as arithmetic coding and the TurboJPEG API. The resulting library still contains the other libjpeg-turbo features (such as the colorspace extensions), but in general, it performs no faster than libjpeg v6b.
+          - make install-strip
+      requires:
+        - nasm
+
+    - <<: *base
+      name:     giflib
+      apt:
+        git: http://git.code.sf.net/p/giflib/code
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-static --disable-shared
+          - make install-strip
+
+    - <<: *base
+      name:     libwebp
+      apt:
+        git: https://chromium.googlesource.com/webm/libwebp
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-static --disable-shared --enable-png --enable-jpeg --enable-jbig --enable-tiff --enable-gif --enable-libwebpmux --enable-libwebpdemux --enable-libwebpdecoder  --enable-libwebpextras --disable-wic --disable-gl
+          - make install-strip
+      requires:
+        - libpng
+        - jbigkit
+        - libjpeg-turbo
+        - libtiff
+        - giflib
+
+    - <<: *base
+      name:     libxpm
+      apt:
+        git: https://anongit.freedesktop.org/git/xorg/lib/libXpm.git
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-static --disable-shared
+          - make install-strip
+
+    - <<: *base
+      name:     libgd
+      apt:
+        git: https://github.com/libgd/libgd.git
+      setup:
+        script:
+          - ./bootstrap.sh
+          - ./configure --enable-static --disable-shared --disable-werror
+          #--with-freetype
+          #--with-fontconfig
+          - make install-strip
+      requires:
+        - zlib
+        - libpng
+        - libjpeg-turbo
+        - libtiff
+        - libwebp
+        - libxpm
+
+    - <<: *base
+      name:     geoip
+      apt:
+        git: https://github.com/maxmind/geoip-api-c.git
+
+    - <<: *base
+      name:     libtap
+      apt:
+        git: https://github.com/zorgnax/libtap.git
+      setup:
+        script:
+          - cp -pva *.c *.h ${PREFIX}/libtap
+
+    - <<: *base
+      name:     libmaxminddb
+      apt:
+        git: https://github.com/maxmind/libmaxminddb.git
+
+    - <<: *base
+      name:     modsecurity-nginx-refactoring
+      apt:
+        git: https://github.com/SpiderLabs/ModSecurity.git
+      branch:   nginx_refactoring
+      status:   inactive
+      setup:
+        script:
+          - ./autogen.sh
+          - ./configure --enable-static --disable-shared --enable-static=yes --enable-shared=no --enable-standalone-module --disable-mlogc --enable-lua-cache --enable-pcre-jit --enable-pcre-study --enable-pcre-match-limit=no --enable-pcre-match-limit-recursion=no
+        #after-script:
+        #   - DEFAULT_USER: *ngx_user
+        #   - DEFAUTT_GROUP: *ngx_group
+      requires:
+        - pcre
+        - zlib
+        - xz
+        - libxml2
+        - apr
+        - ssdeep
+
+    - <<: *base
+      name:     ssdeep
+      apt:
+        git: https://github.com/a4lg/ssdeep.git
+      setup:
+        script:
+          - autoreconf --install
+          - ./configure --enable-static --disable-shared
+          - make install-strip
+
+    - <<: *base
+      name:     owasp-modsecurity-crs
+      apt:
+        git: https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+
+    - <<: *base
+      name:     sregex
+      apt:
+        git: https://github.com/openresty/sregex.git
+
+      # setup:
+      #   script:
+      #    after-script:
+      #       - SREGEX_INC: ${VM_INCLUDE_PATH}
+      #       - SREGEX_LIB: ${VM_LIBRARY_PATH}
+  modules:      &mods
+    - <<: *base-mod
+      name:     echo-nginx-module
+      apt:
+        git: https://github.com/openresty/echo-nginx-module.git
+
+    - <<: *base-mod
+      name:     headers-more-nginx-module
+      apt:
+        git: https://github.com/openresty/headers-more-nginx-module.git
+
+    - <<: *base-mod
+      name:     nginx-rtmp-module
+      apt:
+        git: https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+      branch:   dev
+
+    - <<: *base-mod
+      name:     set-misc-nginx-module
+      apt:
+        git: https://github.com/openresty/set-misc-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     redis2-nginx-module
+      apt:
+        git: https://github.com/openresty/redis2-nginx-module.git
+
+    - <<: *base-mod
+      name:     ngx-http-geoip2-module
+      apt:
+        git: https://github.com/leev/ngx_http_geoip2_module.git
+      setup:
+        script:
+          - mkdir -p t/libtap/
+          - cp -pva ${PREFIX}/libtap/*.c t/libtap/
+          - cp -pva ${PREFIX}/libtap/*.h t/libtap/
+          - sed -i' ' 's|\(#include "tap.h"\)|\1\n#define __USE_MISC\n#include <sys/mman.h>\n|' t/libtap/tap.c
+          - ./bootstrap
+          - ./configure --enable-static --disable-shared
+          - make install-strip
+      requires:
+        - libmaxminddb
+        - libtap
+
+    - <<: *base-mod
+      name:     nginx-vts-module
+      apt:
+        git: https://github.com/vozlt/nginx-module-vts.git
+
+    - <<: *base-mod
+      name:     ngx-brotli-module
+      apt:
+        git: https://github.com/google/ngx_brotli.git
+
+    - <<: *base-mod
+      name:     memc-nginx-module
+      apt:
+        git: https://github.com/openresty/memc-nginx-module.git
+
+    - <<: *base-mod
+      name:     ngx-http-trim-filter-module
+      apt:
+        git: https://github.com/taoyuanyuan/ngx_http_trim_filter_module.git
+
+    - <<: *base-mod
+      name:     ngx-aws-auth-module
+      apt:
+        git: https://github.com/anomalizer/ngx_aws_auth.git
+      requires:
+        - openssl
+        - pcre
+        - zlib
+
+    - <<: *base-mod
+      name:     nginx-eval-module
+      apt:
+        git: https://github.com/openresty/nginx-eval-module.git
+
+    - <<: *base-mod
+      name:     nginx-sorted-querystring-module
+      apt:
+        git: https://github.com/wandenberg/nginx-sorted-querystring-module.git
+
+    - <<: *base-mod
+      name:     ngx-http-substitutions-filter-module
+      apt:
+        git: https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git
+
+    - <<: *base-mod
+      name:     nginx-http-concat-module
+      apt:
+        git: https://github.com/alibaba/nginx-http-concat.git
+
+    - <<: *base-mod
+      name:     nginx-http-rdns-module
+      apt:
+        git: https://github.com/uiltondutra/nginx-http-rdns.git
+
+    - <<: *base-mod
+      name:     nginx-http-auth-digest-module
+      apt:
+        git: https://github.com/atomx/nginx-http-auth-digest.git
+
+    - <<: *base-mod
+      name:     nginx-upstream-fair-module
+      apt:
+        git: https://github.com/hnlq715/nginx-upstream-fair.git
+
+    - <<: *base-mod
+      name:     array-var-nginx-module
+      apt:
+        git: https://github.com/openresty/array-var-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     form-input-nginx-module
+      apt:
+        git: https://github.com/calio/form-input-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     encrypted-session-nginx-module
+      apt:
+        git: https://github.com/openresty/encrypted-session-nginx-module.git
+      requires:
+        - ngx-devel-kit-module
+
+    - <<: *base-mod
+      name:     nginx-sticky-ng-module
+      apt:
+        git: https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng.git
+      setup:
+        script:
+          - sed -i'' 1s|^|#include <openssl/md5.h>\n|' ngx_http_sticky_misc.c
+          - sed -i'' '1s|^|#include <openssl/sha.h>\n|' ngx_http_sticky_misc.c
+
+    - <<: *base-mod
+      name:     naxsi
+      apt:
+        git: https://github.com/nbs-system/naxsi.git
+
+    - <<: *base-mod
+      name:     srcache-nginx-module
+      apt:
+        git: https://github.com/openresty/srcache-nginx-module.git
+
+    - <<: *base-mod
+      name:     ngx-devel-kit-module
+      apt:
+        git: https://github.com/simpl/ngx_devel_kit.git
+      dynamic:  false
+
+    - <<: *base-mod
+      name:     lua-nginx-module
+      apt:
+        git: https://github.com/openresty/lua-nginx-module.git
+      status:   active
+      requires:
+        - luajit
+        - ngx-devel-kit-module
+      dynamic:  false
+
+    - <<: *base-mod
+      name:     ngx-cache-purge-module
+      apt:
+        git: https://github.com/FRiCKLE/ngx_cache_purge.git
+      dynamic:  false
+
+    - <<: *base-mod
+      name:     ngx-http-dyups-module
+      apt:
+        git: https://github.com/yzprofile/ngx_http_dyups_module.git
+      dynamic:  false
+
+    - <<: *base-mod
+      name:     nginx-upstream-check-module
+      apt:
+        git: https://github.com/2Fast2BCn/nginx_upstream_check_module.git
+      dynamic:  false
+
+    - <<: *base-mod
+      name:     replace-filter-nginx-module
+      apt:
+        git: https://github.com/openresty/replace-filter-nginx-module.git
+      dynamic:  false
+      requires:
+        - sregex
+
+
+# ███    ██  ██████  ██ ███    ██ ██   ██
+# ████   ██ ██       ██ ████   ██  ██ ██
+# ██ ██  ██ ██   ███ ██ ██ ██  ██   ███
+# ██  ██ ██ ██    ██ ██ ██  ██ ██  ██ ██
+# ██   ████  ██████  ██ ██   ████ ██   ██
+
+nginx:
+  name:      nginx
+  version:   1.10.3
+  url:       http://nginx.org/download/
+  options:
+    prefix:       /usr/local/nginx
+    sbin:         /usr/local/nginx/sbin/nginx
+    modules-path: /usr/local/nginx/modules
+    conf:         /usr/local/nginx/conf/nginx.conf
+    http-log:     /usr/local/nginx/logs/access.log
+    error-log:    /usr/local/nginx/logs/error.log
+    pid:          /var/run/nginx.pid
+    user:         &ngx_user nginx
+    group:        &ngx_group nginx
+  setup:
+    before-script:
+      - CFLAGS: $(pcre-config --cflags)
+      - LDFLAGS: -lz -L/build/BUILDROOT/vm/lib
+    patches:
+      nginx.no-server.patch: -p0 -B .no-server
+      nginx.no-footer.patch: -p0 -B .no-footer
+    <<: *base-pre-post-build
+#  requires:
+  #   - zlib
+    #- libatomic_ops
+    #- pcre
+  library:
+    - name: libatomic
+      status: active
+      ref: atomic_ops
+      # setup:
+      #   before-script:
+      #     - sed -i'' 's|configure|autogen.sh \&\& ./configure --enable-static --disable-shared --disable-dependency-tracking|' auto/lib/libatomic/make
+      #     - sed -i'' 's|src/libatomic_ops.a|src/.libs/libatomic_ops.a|' auto/lib/libatomic/make
+      #     - sed -i'' 's|src/libatomic_ops.a|src/.libs/libatomic_ops.a|' auto/lib/libatomic/conf
+      # <<: *base-pre-post-build
+    - name: zlib
+      status: inactive
+      ref: zlib
+    - name: openssl
+      status: inactive
+      ref: openssl
+    - name: pcre
+      status: inactive
+      ref: pcre
+  modules:
+    third-party: *mods
+    bundled:
+      - name: file-aio
+      - name: threads
+      - name: pcre-jit
+        # setup:
+        #   before-script:
+        #     - LDFLAGS: -lpcre -lpthread
+        requires:
+          - pcre
+      - name: http_addition_module
+      - name: http_auth_request_module
+        status: inactive
+      - name: http_dav_module
+        status: inactive
+      - name: http_flv_module
+        status: inactive
+      - name: http_gunzip_module
+      - name: http_gzip_static_modulef
+      - name: http_mp4_module
+        status: inactive
+      - name: http_realip_module
+      - name: http_secure_link_module
+      - name: http_slice_module
+      - name: http_ssl_module
+      - name: http_stub_status_module
+      - name: http_sub_module
+        status: inactive
+      - name: http_v2_module
+      - name: http_xslt_module
+        value: dynamic
+        status: inactive
+        setup:
+          script:
+            - sed -i' ' 's|ngx_feature_path="/usr/include/libxml2"|ngx_feature_path="${VM_INCLUDE_PATH} ${VM_INCLUDE_PATH}/libxml2"|g' auto/lib/libxslt/conf
+        requires:
+          - libxml2
+          - libxslt
+      - name: http_image_filter_module
+        value: dynamic
+        status: inactive
+        requires:
+          - libgd
+      - name: http_geoip_module
+        value: dynamic
+        status: inactive
+        setup:
+          script:
+            - sed -i' ' 's|ngx_feature_libs="-lGeoIP"|ngx_feature_libs="$(pkg-config --libs --static ${VM_LIBRARY_PATH}/pkgconfig/geoip.pc)"|g' auto/lib/geoip/conf
+            - sed -i' ' 's|-lGeoIP\([[:space:]$"]\)|${VM_LIBRARY_PATH}/libGeoIP.a\1|g' auto/lib/geoip/conf
+          patches:
+        requires:
+          - geoip
+      - name: http_perl_module
+        value: dynamic
+        status: inactive
+      - name: http_random_index_module
+        status: inactive
+      - name: mail
+        value: dynamic
+        status: inactive
+      - name: mail_ssl_module
+        status: inactive
+      - name: stream
+        value: dynamic
+      - name: stream_ssl_module
+      - name: http_memcached_module
+        status: inactive
+      - name: http_autoindex_module
+        status: inactive
+      #
+#      - name: cc-opt
+#        value: $(pcre-config --cflags)
+
+...

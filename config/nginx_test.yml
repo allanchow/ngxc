@@ -1,0 +1,57 @@
+nginx:
+  name:      nginx
+#  version:   1.10.3
+  apt:
+    #url:       http://nginx.org/download/nginx-1.10.3.tar.gz
+    url:       http://nginx.org/download/nginx-1.11.10.tar.gz
+  options:
+    prefix:       /usr/local/nginx
+    # sbin:         /usr/local/nginx/sbin/nginx
+    # modules-path: /usr/local/nginx/modules
+    # conf:         /usr/local/nginx/conf/nginx.conf
+    # http-log:     /usr/local/nginx/logs/access.log
+    # error-log:    /usr/local/nginx/logs/error.log
+    # pid:          /var/run/nginx.pid
+    #user:         nginx
+    #group:        nginx
+    force_tfo:    True
+    debug:        False
+  setup:
+    before-script:
+      - CFLAGS: -Ofast
+    # before-script:
+    #   - CFLAGS: -Ofast $(pcre-config --cflags)
+    #   - LDFLAGS: -lz -L/build/BUILDROOT/vm/lib
+    patches:
+      - nginx.1.11.x.no-server.patch: -p0 -B .no-server
+      - nginx.1.11.x.no-footer.patch: -p0 -B .no-footer
+    <<: *base-pre-post-build
+  library:
+    # - name: libatomic
+    #   ref: atomic_ops
+    #   setup:
+    #     before-script:
+    #       - sed -i 's|configure|autogen.sh \&\& ./configure --disable-dependency-tracking|' auto/lib/libatomic/make
+    #       - sed -i 's|src/libatomic_ops.a|src/.libs/libatomic_ops.a|' auto/lib/libatomic/make
+    #       - sed -i 's|src/libatomic_ops.a|src/.libs/libatomic_ops.a|' auto/lib/libatomic/conf
+    #   <<: *base-pre-post-build
+    - name: zlib
+      ref: zlib
+    # - name: openssl
+    #   ref: openssl
+    # - name: pcre
+    #   ref: libpcre
+      # setup:
+      #   before-script:
+      #     - LDFLAGS: -Wl,-Bstatic -lpcre -lpthread -Wl,-Bdynamic -ldl
+  modules:
+    third-party: *mods
+    bundled:
+      # 1.11.X
+      - name: compat
+        status: active
+      - name: file-aio
+        status: active
+      - name: threads
+        status: active
+      
