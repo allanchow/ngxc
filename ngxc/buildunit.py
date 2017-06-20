@@ -97,7 +97,7 @@ class BuildUnit(_BaseObject, metaclass=ABCMeta):
 
         # print(node.name)
         # print(node.branch)
-        self.__setup_node = node.get('setup', default={}, key=YamlKey.Optional, keytype=YamlKeyType.Map)
+        self.__setup_node = node.get('setup', default=YamlMap(), key=YamlKey.Optional, keytype=YamlKeyType.Map)
         # print(type(node))
         # print('----')
         self.threads_enabled = self.__setup_node.get('threads-enabled', default=True, key=YamlKey.Optional, keytype=YamlKeyType.Boolean)
