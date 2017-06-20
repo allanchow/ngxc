@@ -135,7 +135,7 @@ nginx:
         dynamic: True
         setup:
           before-script:
-            - sed -i s|ngx_feature_path="/usr/include/libxml2"|ngx_feature_path="${VM_INCLUDE_PATH} ${VM_INCLUDE_PATH}/libxml2"|g' auto/lib/libxslt/conf
+            - sed -i 's|ngx_feature_path="/usr/include/libxml2"|ngx_feature_path="${VM_INCLUDE_PATH} ${VM_INCLUDE_PATH}/libxml2"|g' auto/lib/libxslt/conf
         requires:
           - libxml2
           - libxslt
