@@ -1,3 +1,14 @@
 ngx/*
-__pycache__/*
-.mypy_cache/*
+__pycache__/
+.mypy_cache/
+*.o
+*.so
+*.pyc
+*.swp
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
