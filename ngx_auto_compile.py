@@ -6,6 +6,7 @@ import os
 import sys
 from typing import Tuple
 
+from ruamel import yaml
 import git
 #from memory_profiler import profile
 
@@ -76,6 +77,8 @@ if __name__ == '__main__':
     ver = git.Git().version_info
     assert ver[:2] >= (2, 5), 'Git minium version required: >= 2.5'
     logging.info('Git Version: %s' % ver_fmt(ver))
+    ver = yaml.version_info
+    assert ver >= (0, 15), 'ruamel.yaml minium version required: >= 0.15'
     # TODO: requires libtool
     # TODO: check pkg-config if exist, >0.9.0
     package_force_update = '-f' in sys.argv
