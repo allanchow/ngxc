@@ -89,7 +89,7 @@ class Command(_BaseObject):
 
         cwd = self.__cwd
         if dry_run or log:
-            logging.debug('Command [shell=%s, dry_run=%s, pwd=%s]: "\033[1;92m%s\033[0m"' % (self.__shell, dry_run, cwd, str(self)))
+            logging.debug('Command [shell=%s, dry_run=%s, pwd=%s]: \033[1;92m%s\033[0m' % (self.__shell, dry_run, cwd, str(self)))
 
         if not dry_run:
             #subprocess.check_call(self.value, shell=shell, env=env, cwd=cwd, executable='/bin/bash')
