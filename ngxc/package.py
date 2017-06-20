@@ -57,7 +57,7 @@ class PackageUpdatable(Package, metaclass=ABCMeta):
         self.url = apt.get('url', key=YamlKey.Optional, keytype=YamlKeyType.String)
         self.file = apt.get('file', key=YamlKey.Optional, keytype=YamlKeyType.String)
         assert self.git or self.url or self.file, 'Missing source target: %s' % self.name
-        self.branch = node.get('branch', default='HEAD', key=YamlKey.Optional, keytype=YamlKeyType.String)
+        self.branch = str(node.get('branch', default='HEAD', key=YamlKey.Optional))
         self.tag = node.get('tag', key=YamlKey.Optional, keytype=YamlKeyType.String)
         self.commit = node.get('commit', key=YamlKey.Optional, keytype=YamlKeyType.String)
         # self._setup      = Setup(node.get('setup', YamlMap(), key=YamlKey.Optional))
