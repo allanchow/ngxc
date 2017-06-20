@@ -28,9 +28,17 @@ defaults:
     setup:
       <<: *base-pre-post-build
   - &base-mod
-    <<: *base
-    dynamic: False
+    name:
     status: inactive
+    apt:
+    branch: master
+    tag:
+    commit:
+    requires:
+    # build: globally / local
+    scope: local
     setup:
+      threads-enabled: True
+      script:
       <<: *base-pre-post-build
-    #
+    dynamic: False
