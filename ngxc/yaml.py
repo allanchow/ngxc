@@ -4,6 +4,8 @@ import collections
 import enum
 from typing import no_type_check, Any, List, Tuple, TypeVar, NamedTuple
 
+from ruamel.yaml import scalarstring
+
 from .base import _CustomMap
 from .utils import is_flag
 
@@ -54,14 +56,16 @@ class YamlSeq(collections.MutableSequence):
     def insert(self, index, value):
         self.__list__.insert(index, value)
 
-_vm = collections.namedtuple('_vm', ['flag', 'vt', 'cls', 'msg'])
+_vm = collections.namedtuple('_vm', ['flag', 'vt', 'cls'])
 
 def _valmap() -> List[_vm]:
     return [
-        _vm(flag=YamlKeyType.Map, vt=dict, cls=YamlMap, msg='It should be an array'),
-        _vm(flag=YamlKeyType.Sequence, vt=list, cls=YamlSeq, msg='It should be a dictionary object'),
-        _vm(flag=YamlKeyType.Boolean, vt=bool, cls=bool, msg='It should be a boolean'),
-        _vm(flag=YamlKeyType.String, vt=str, cls=str, msg='It should a string'),
+        _vm(flag=YamlKeyType.Map, vt=dict, cls=YamlMap),
+        _vm(flag=YamlKeyType.Sequence, vt=list, cls=YamlSeq),
+        _vm(flag=YamlKeyType.Boolean, vt=bool, cls=bool),
+        _vm(flag=YamlKeyType.String, vt=scalarstring.DoubleQuotedScalarString, cls=scalarstring.DoubleQuotedScalarString),
+        _vm(flag=YamlKeyType.String, vt=scalarstring.SingleQuotedScalarString, cls=scalarstring.SingleQuotedScalarString),
+        _vm(flag=YamlKeyType.String, vt=str, cls=str),
     ]
 
 class YamlMap(_CustomMap):
@@ -114,14 +118,16 @@ class YamlMap(_CustomMap):
         types = [k for k in _valmap() if is_flag(k.flag, keytype)]
 
         for k in types:
-            if keytype == YamlKeyType.Auto and isinstance(val, k.vt):
-                return k.cls(val) if k.cls else val
-            elif len(types) == 1:
-                try:
-                    return k.cls(val) if k.cls else val
-                except ValueError:
-                    assert False, '%s: %s' % (k.msg, val)
+            if isinstance(val, k.vt):
+                # print('%s, %s, %s' % (val,type(val), k.vt))
+                if k.vt == scalarstring.SingleQuotedScalarString:
+                    return "'" + str(val) + "'"
+                if k.vt == scalarstring.DoubleQuotedScalarString:
+                    return  '"' + str(val) + '"'
+                return (k.cls(val) if k.cls else val)
 
+        if keytype != YamlKeyType.Auto:
+            assert False, 'Please conform to the scheme: %s' % keytype
         # Reach here if keytype is auto and not match to our transform types
         return val
     # def __wrap(self, val: Any, keytype: YamlKeyType=YamlKeyType.Auto) -> Any:
