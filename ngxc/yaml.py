@@ -97,7 +97,8 @@ class YamlMap(_CustomMap):
         # has keys but no val, get will return None
         # but this should return default in this situation
         defval = kwargs['default']
-        val = self.__dict__.get(yaml_key, defval)
+        val = self.__dict__.get(yaml_key)
+        # val = self.__dict__.get(yaml_key, defval)
         if val is None:
             assert not required, 'Empty value in key: %s in %s' % (yaml_key, self.__dict__)
             return defval
