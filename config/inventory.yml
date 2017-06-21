@@ -268,8 +268,8 @@ inventory:
         - LUA_LIB_DIR: ${LUAJIT_LIB}
         - LUA_CMODULE_DIR: ${LUAJIT_LIB}
         - LUA_MODULE_DIR: ${LUAJIT_LIB}
-        - LUA_PATH: \"./?.lua;;${LUAJIT_LIB}/?.lua\"
-        - LUA_CPATH: \"./?.so;;${LUAJIT_LIB}/?.so\"
+        - LUA_PATH: "./?.lua;;${LUAJIT_LIB}/?.lua"
+        - LUA_CPATH: "./?.so;;${LUAJIT_LIB}/?.so"
 
     - <<: *base
       name:     libunwind
