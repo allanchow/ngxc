@@ -156,7 +156,11 @@ inventory:
         patches:
           - lua_system_constant.fix.luajit.patch: -p0 -B .luajit
         before-script:
+          - CFLAGS: -I${VM_LUA_INCLUDE_PATH}
           - LUA: luajit
+          - LUA_LIBDIR: $(pkg-config $LUA --libs)
+          - LUA_INCDIR: $(pkg-config $LUA --cflags)
+          - INST_LIBDIR: ${VM_LUA_CMODULE_PATH}
         script:
           - make
           - make install
