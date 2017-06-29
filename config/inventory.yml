@@ -175,6 +175,16 @@ inventory:
           - cp -pvar lua/pl ${VM_LUA_CMODULE_PATH}/
       requires:
         - luafilesystem
+
+    - <<: *base-lua
+      name: lua-resty-limit-traffic
+      apt:
+        git: https://github.com/openresty/lua-resty-limit-traffic
+      status: active
+      setup:
+        script:
+          - make install
+
     # - <<: *base-lua
     #   name:     lua-openssl
     # requires openssl to compat with 0.9.8, and not well support OpenSSL 1.1.0+
