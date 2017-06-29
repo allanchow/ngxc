@@ -67,7 +67,7 @@ inventory:
         git: https://github.com/bungle/lua-resty-session.git
       setup:
         script:
-          - make install
+          - cp -pva lib/resty ${VM_LUA_CMODULE_PATH}/
 
     - <<: *base-lua
       name:     lua-resty-jwt
