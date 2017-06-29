@@ -65,6 +65,7 @@ inventory:
       name:     lua-resty-session
       apt:
         git: https://github.com/bungle/lua-resty-session.git
+      status: active
       setup:
         script:
           - cp -pva lib/resty ${VM_LUA_CMODULE_PATH}/
