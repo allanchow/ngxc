@@ -877,7 +877,7 @@ inventory:
       name: ngx-upstream-jdomain-module
       apt:
         git: https://github.com/viciious/ngx_upstream_jdomain.git
-      status: active
+      dynamic: False
 
     - <<: *base-mod
       name: ngx-vod-module-module
