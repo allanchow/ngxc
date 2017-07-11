@@ -183,6 +183,10 @@ inventory:
         git: https://github.com/openresty/lua-resty-limit-traffic
       status: active
       setup:
+        before-script:
+          # https://github.com/openresty/lua-resty-limit-traffic/pull/17
+          - wget https://github.com/shawnzhu/lua-resty-limit-traffic/blob/2cb6ec7190f1601fecb685f08fda34f532e9cd1e/lib/resty/limit/count.md  > lib/resty/limit/count.md
+          - wget https://github.com/shawnzhu/lua-resty-limit-traffic/blob/2cb6ec7190f1601fecb685f08fda34f532e9cd1e/lib/resty/limit/count.lua > lib/resty/limit/count.lua
         script:
           - make install
 
