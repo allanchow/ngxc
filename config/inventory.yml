@@ -815,20 +815,21 @@ inventory:
         git: https://github.com/openresty/lua-nginx-module.git
       status: active
       setup:
-        #patches:
-        #  - lua-nginx.openssl.1.1.x.fix.01.12a56fe.patch: -p0
-        #  - lua-nginx.openssl.1.1.x.fix.02.2311024.patch: -p0
-        #  - lua-nginx.openssl.1.1.x.fix.03.d14f90e.patch: -p0
-        #  - lua-nginx.openssl.1.1.x.fix.04.d093951.patch: -p0
+        patches:
+         - lua-nginx-module/openssl.1.1.x.fix.01.31aee76.patch: -p1
+         - lua-nginx-module/openssl.1.1.x.fix.02.12a56fe.patch: -p1
+         #- lua-nginx-module/openssl.1.1.x.fix.03.2311024.patch: -p1
+         - lua-nginx-module/openssl.1.1.x.fix.04.d14f90e.patch: -p1
+         - lua-nginx-module/openssl.1.1.x.fix.05.d093951.patch: -p1
         #  - lua-nginx.fix.lua-2.1.patch: -p0 -B .fix.lua-2.1
         #  - lua-nginx.fix.1.11.11.patch: -p0 -B .fix.1.11.11
-        before-script:
-          # in openssl-1.1 brach
-          - git cherry-pick 31aee768d856f7dfabe069d220c003fad0c67fa1
-          - git cherry-pick 12a56fef7db3d9df6a0df6ab91a9e7c38bace4ea
-          - git cherry-pick 2311024b02033cdb9e16e3ffe6870f43bde17301
-          - git cherry-pick d14f90ed98c3c5152f4bbb52e29fd089379e21a2
-          - git cherry-pick d0939519511d77c73b99753ee2c77369d349cc9e
+        # before-script:
+        #   # in openssl-1.1 branch
+        #   - git cherry-pick 31aee768d856f7dfabe069d220c003fad0c67fa1
+        #   - git cherry-pick 12a56fef7db3d9df6a0df6ab91a9e7c38bace4ea
+        #   - git cherry-pick 2311024b02033cdb9e16e3ffe6870f43bde17301
+        #   - git cherry-pick d14f90ed98c3c5152f4bbb52e29fd089379e21a2
+        #   - git cherry-pick d0939519511d77c73b99753ee2c77369d349cc9e
       requires:
         - luajit
         - ngx-devel-kit-module
