@@ -412,6 +412,8 @@ inventory:
           #- ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --enable-pcretest-libreadline
           - ./configure --enable-utf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-jit
           - make install-strip
+          - ./RunTest
+          - ./RunGrepTest
         #after-script:
         #  - LDFLAGS: -lpcre -lpthread
 
