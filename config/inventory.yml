@@ -228,22 +228,23 @@ inventory:
         git: https://github.com/jemalloc/jemalloc.git
         # commit: 50893291621658f355bc5b4d450a8d06a563053d
       branch: master
-      status: inactive
+      status: active
       scope:  global
       setup:
         before-script:
           - CFLAGS: >-
-              -g3 -O3
-              -fno-lto
+              #-fno-lto
               -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free
               -fno-builtin-memalign -fno-builtin-posix_memalign -fno-builtin-valloc -fno-builtin-pvalloc
-              -Werror=declaration-after-statement -Wsign-compare
+              #-Werror=declaration-after-statement -Wsign-compare
         script:
-          - ./autogen.sh
+          - ./autogen.sh --enable-lazy-lock --enable-xmalloc --enable-shared
           - make build_lib
-          #- make install
-          - make install_include install_lib_static install_lib_pc
-          - make tests check
+          - make install_bin
+          - make install_include
+          - make install_lib
+          - make tests
+          - make check
 
     - <<: *base
       name:     zlib
