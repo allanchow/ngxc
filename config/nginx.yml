@@ -35,6 +35,9 @@ nginx:
       # LUA - HAVE_INTERCEPT_ERROR_LOG_PATCH
       # https://github.com/openresty/lua-nginx-module/commit/1a5a33e61f4d747efa8460555407357ca166eca1
       - nginx.1.12.x.intercept_error_log.patch: -p1
+      - nginx.1.12.x.proxy_host_ports_vars.patch: -p0 -B .proxy_host_ports_vars
+      - nginx.1.12.x.upstream_pipelining.patch: -p0 -B .upstream_pipelining
+      - nginx.1.12.x.dynamic_tls_records.patch: -p1
 
     <<: *base-pre-post-build
   library:
