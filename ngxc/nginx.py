@@ -222,13 +222,17 @@ class Nginx(PackageUpdatable):
             lua_libs = [l for l in Inventory.lualib_active.values()]
             for lua in lua_libs:
                 lua._run()
-                lua_ld_opts.add('-D%s' % lua.name.replace('-', '_'))
+                lua_ld_opts.add('-Dil_%s' % lua.name.replace('-', '_'))
             if not Environment._dry_run:
                 lua_pkg_sep = '_'
                 for root, dirs, files in os.walk(lua_cmodule_top, topdown=True):
                     for f in files:
                         file_full_path = '%s/%s' % (root, f)
-                        obj_lua_filename = '%s%s%s' % (root.replace('%s/' % lua_cmodule_top, '').replace('/', lua_pkg_sep), lua_pkg_sep, f)
+                        prefix = root.replace('%s' % lua_cmodule_top, '')
+                        if prefix:
+                            prefix = '%s%s' % (prefix[1:].replace('/', lua_pkg_sep), lua_pkg_sep)
+                        obj_lua_filename = '%s%s' % (prefix, f)
+                        #obj_lua_filename = '%s%s%s' % (root.replace('%s/' % lua_cmodule_top, '').replace('/', lua_pkg_sep), lua_pkg_sep, f)
                         if f.endswith('.lua'):
                             obj_lua_fullpath = '%s/%s' % (lua_cmodule_objs, obj_lua_filename)
                             os.rename(file_full_path, obj_lua_fullpath)
