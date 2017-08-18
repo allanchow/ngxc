@@ -4,7 +4,7 @@ nginx:
   apt:
     #url:       http://nginx.org/download/nginx-1.10.3.tar.gz
     #url:       http://nginx.org/download/nginx-1.11.13.tar.gz
-    url:       http://nginx.org/download/nginx-1.12.0.tar.gz
+    url:       http://nginx.org/download/nginx-1.12.1.tar.gz
   options:
     prefix:       /usr/local/nginx
     # sbin:         /usr/local/nginx/sbin/nginx
