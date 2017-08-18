@@ -433,11 +433,12 @@ inventory:
       apt:
         git: http://git.tukaani.org/xz.git
       scope: global
-      status: active
+      status: inactive
       setup:
         script:
           - ./autogen.sh
-          - ./configure --disable-rpath
+          #- ./configure --disable-rpath
+          - ./configure
           - make install-strip
 
     - <<: *base
