@@ -199,6 +199,15 @@ inventory:
         script:
           - make install
 
+    - <<: *base-lua
+      name: lua-resty-cookie
+      apt:
+        git: https://github.com/cloudflare/lua-resty-cookie.git
+      status: active
+      setup:
+        script:
+          - cp -pvar lib/resty ${VM_LUA_CMODULE_PATH}/
+
     # - <<: *base-lua
     #   name:     lua-openssl
     # requires openssl to compat with 0.9.8, and not well support OpenSSL 1.1.0+
