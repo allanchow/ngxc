@@ -154,6 +154,9 @@ class Environment(_BaseObject, metaclass=Singleton):
 
         # if static, may break library even dynamic modules
         #gcc_cflags.append('-fvisibility=hidden -Wl,--exclude-libs,ALL')
+        # part of O3 options
+        gcc_cflags.append('-fexcess-precision=fast -fpredictive-commoning -fgcse-after-reload -fipa-cp-clone')
+        gcc_cflags.append('-mtls-dialect=gnu2')
 
         gcc_cflags.append('-fomit-frame-pointer -ftrapv -fwrapv -fno-wrapv -fdebug-prefix-map=/root=.')
         # harderen
