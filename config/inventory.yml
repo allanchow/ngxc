@@ -402,7 +402,7 @@ inventory:
     - <<: *base
       name: libpcre
       apt:
-        url: https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz
+        url: https://ftp.pcre.org/pub/pcre/pcre-8.41.tar.gz
       status: active
       setup:
         before-script:
