@@ -834,12 +834,14 @@ inventory:
       apt:
         git: https://github.com/simpl/ngx_devel_kit.git
       status: active
+      dynamic: False
 
     - <<: *base-mod
       name:     lua-nginx-module
       apt:
         git: https://github.com/openresty/lua-nginx-module.git
       status: active
+      dynamic: False
       setup:
         patches:
          - lua-nginx-module/openssl.1.1.x.fix.01.31aee76.patch: -p1
