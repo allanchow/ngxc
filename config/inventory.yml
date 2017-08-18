@@ -167,6 +167,15 @@ inventory:
           - make install
 
     - <<: *base-lua
+      name: version.lua
+      apt:
+        git: https://github.com/Mashape/version.lua.git
+      status: active
+      setup:
+        script:
+          - cp -pvar src/*.lua ${VM_LUA_CMODULE_PATH}/
+
+    - <<: *base-lua
       name: penlight
       apt:
         git: https://github.com/stevedonovan/Penlight.git
